@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class StartCommand implements Command {
 
-    private final String HELLO_MESSAGE = "Привет, я бот для отслеживания изменений по ссылкам," +
-        " которые ты мне скинешь. О моих возможностях ты можешь узнать используя команду /help.";
-    private final String COMMAND = "/start";
-    private final String COMMAND_DESCRIPTION = "Команда для регистрации пользователя в боте.";
+    private static final String HELLO_MESSAGE = "Привет, я бот для отслеживания изменений по ссылкам,"
+        + " которые ты мне скинешь. О моих возможностях ты можешь узнать используя команду /help.";
+    private static final String COMMAND = "/start";
+    private static final String COMMAND_DESCRIPTION = "Команда для регистрации пользователя в боте.";
 
     @Override
     public String command() {

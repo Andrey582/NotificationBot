@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class TrackCommand implements Command {
 
-    private final String INCORRECT_LENGTH = "Команда должна иметь вид \'/track link\'.";
-    private final String COMMAND = "/track";
-    private final String COMMAND_DESCRIPTION = "Команда добавляет ссылку для отслеживания." +
-        " (/track link)";
+    private static final String INCORRECT_LENGTH = "Команда должна иметь вид \'/track link\'.";
+    private static final String COMMAND = "/track";
+    private static final String COMMAND_DESCRIPTION = "Команда добавляет ссылку для отслеживания."
+        + " (/track link)";
 
     @Override
     public String command() {

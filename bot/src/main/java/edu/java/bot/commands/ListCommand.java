@@ -2,18 +2,16 @@ package edu.java.bot.commands;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import org.hibernate.validator.internal.engine.PredefinedScopeConfigurationImpl;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ListCommand implements Command {
 
-    private final String EMPTY_LINKS = "В списке нет отслеживаемых ссылок";
-    private final String COMMAND = "/list";
-    private final String COMMAND_DESCRIPTION = "Команда выводящая список всех отслеживаемых ссылок.";
+    private static final String EMPTY_LINKS = "В списке нет отслеживаемых ссылок";
+    private static final String COMMAND = "/list";
+    private static final String COMMAND_DESCRIPTION = "Команда выводящая список всех отслеживаемых ссылок.";
     private List<String> links = new ArrayList<>();
 
     @Override

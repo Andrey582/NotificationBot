@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class UntrackCommand implements Command {
 
-    private final String INCORRECT_LENGTH = "Команда должна иметь вид \'/untrack link\'.";
-    private final String COMMAND = "/untrack";
-    private final String COMMAND_DESCRIPTION = "Команда удаляет отслеживаемую ссылку." +
-        " (/untrack link)";
+    private static final String INCORRECT_LENGTH = "Команда должна иметь вид \'/untrack link\'.";
+    private static final String COMMAND = "/untrack";
+    private static final String COMMAND_DESCRIPTION = "Команда удаляет отслеживаемую ссылку."
+        + " (/untrack link)";
 
     @Override
     public String command() {

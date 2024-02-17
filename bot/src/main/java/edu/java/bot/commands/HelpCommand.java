@@ -1,18 +1,17 @@
 package edu.java.bot.commands;
 
 import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.request.SendMessage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class HelpCommand implements Command {
 
-    private final String COMMAND = "/help";
-    private final String COMMAND_DESCRIPTION = "Команда выводящая список всех возможных команд.";
+    private static final String COMMAND = "/help";
+    private static final String COMMAND_DESCRIPTION = "Команда выводящая список всех возможных команд.";
     @Autowired
     private List<Command> availableCommands;
 
