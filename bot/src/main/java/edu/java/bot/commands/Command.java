@@ -12,12 +12,20 @@ public interface Command {
 
     SendMessage handle(Update update);
 
+    @SuppressWarnings("MageicNumber")
     default boolean supports(Update update) {
-        return update
-            .message()
-            .text()
-            .split(" ")[0]
-            .equals(command());
+        if (update.message() == null) {
+            return false;
+        } else if (update.message().text() == null) {
+            return false;
+        } else {
+            return update
+                .message()
+                .text()
+                .strip()
+                .split(" ", 2)[0]
+                .equals(command());
+        }
     }
 
     default BotCommand toApiCommand() {

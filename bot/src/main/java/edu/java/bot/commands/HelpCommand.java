@@ -34,4 +34,9 @@ public class HelpCommand implements Command {
                     .collect(Collectors.joining("\n\n"))
         );
     }
+
+    @Autowired
+    private void addThisCommandToAvailable() {
+        availableCommands.add(this);
+    }
 }

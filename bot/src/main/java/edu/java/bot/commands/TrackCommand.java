@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class TrackCommand implements Command {
 
-    private static final String INCORRECT_LENGTH = "Команда должна иметь вид \'/track link\'.";
+    private static final String INCORRECT_LENGTH = "Команда должна иметь вид \'/track link [name]\'.";
     private static final String COMMAND = "/track";
-    private static final String COMMAND_DESCRIPTION = "Команда добавляет ссылку для отслеживания."
-        + " (/track link)";
+    private static final String COMMAND_DESCRIPTION = "Команда добавляет ссылку для отслеживания.\n"
+        + "(/track link [name]). name - необязательный параметр.";
 
     @Override
     public String command() {
@@ -30,8 +30,9 @@ public class TrackCommand implements Command {
         );
     }
 
+    @SuppressWarnings("MagicNumber")
     private String getLink(Update update) {
-        String[] msg = update.message().text().split(" ");
+        String[] msg = update.message().text().strip().split("\s+", 3);
         if (msg.length < 2) {
             return INCORRECT_LENGTH;
         }
