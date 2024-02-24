@@ -65,7 +65,7 @@ public class TrackCommandTest {
         Mockito.when(message.text()).thenReturn("/track");
 
         String result = handler.handleCommand(update).getParameters().get("text").toString();
-        String expected = "Команда должна иметь вид \'/track link\'.";
+        String expected = "Команда должна иметь вид \'/track link [name]\'.";
 
         assertThat(result)
             .isEqualTo(expected);

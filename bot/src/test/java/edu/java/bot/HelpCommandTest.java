@@ -26,7 +26,8 @@ public class HelpCommandTest {
                 new ListCommand(),
                 new StartCommand(),
                 new TrackCommand(),
-                new UntrackCommand()
+                new UntrackCommand(),
+                new HelpCommand()
             )
         );
         Update update = Mockito.mock(Update.class);
@@ -43,9 +44,13 @@ public class HelpCommandTest {
             "/start\n" +
             "Команда для регистрации пользователя в боте.\n\n" +
             "/track\n" +
-            "Команда добавляет ссылку для отслеживания. (/track link)\n\n" +
+            "Команда добавляет ссылку для отслеживания.\n" +
+            "(/track link [name]). name - необязательный параметр.\n\n" +
             "/untrack\n" +
-            "Команда удаляет отслеживаемую ссылку. (/untrack link)";
+            "Команда удаляет отслеживаемую ссылку.\n" +
+            "(/untrack link | name). Используте ссылку или ее название.\n\n" +
+            "/help\n" +
+            "Команда выводящая список всех возможных команд.";
 
         assertThat(result)
             .isEqualTo(expected);

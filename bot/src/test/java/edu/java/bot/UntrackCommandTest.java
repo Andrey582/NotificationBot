@@ -65,7 +65,7 @@ public class UntrackCommandTest {
         Mockito.when(message.text()).thenReturn("/untrack");
 
         String result = handler.handleCommand(update).getParameters().get("text").toString();
-        String expected = "Команда должна иметь вид \'/untrack link\'.";
+        String expected = "Команда должна иметь вид \'/untrack link | name\'.";
 
         assertThat(result)
             .isEqualTo(expected);
