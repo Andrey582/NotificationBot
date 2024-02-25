@@ -3,8 +3,8 @@ app:
     enable: false
     interval: 10s
     force-check-delay: 10s
-  stackoverflowBaseUrl: https://api.stackexchange.com/2.3
-  githubBaseUrl: https://api.github.com
+  stackoverflowBaseUrl: http://localhost:8080/2.3
+  githubBaseUrl: http://localhost:8080
 
 spring:
   application:
