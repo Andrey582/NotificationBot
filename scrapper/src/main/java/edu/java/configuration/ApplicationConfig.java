@@ -16,10 +16,8 @@ public record ApplicationConfig(
     @Bean
     Scheduler scheduler,
 
-    @NotNull
     String stackoverflowBaseUrl,
 
-    @NotNull
     String githubBaseUrl
 ) {
 
