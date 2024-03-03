@@ -13,29 +13,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.util.ReflectionTestUtils;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@SpringBootTest(classes = BotApplication.class)
 public class UntrackCommandTest {
 
+    @Autowired
     private MessageHandler handler;
-
-    @BeforeAll
-    public void init() {
-        handler = new MessageHandler();
-        ReflectionTestUtils.setField(
-            handler,
-            "commands",
-            List.of(
-                new StartCommand(),
-                new HelpCommand(),
-                new TrackCommand(),
-                new UntrackCommand(),
-                new ListCommand()
-            )
-        );
-    }
 
     @Test
     public void untrackCommandTest() {
@@ -45,10 +32,10 @@ public class UntrackCommandTest {
         Mockito.when(update.message()).thenReturn(message);
         Mockito.when(message.chat()).thenReturn(chat);
         Mockito.when(chat.id()).thenReturn(1L);
-        Mockito.when(message.text()).thenReturn("/untrack some_link");
+        Mockito.when(message.text()).thenReturn("/untrack https://github.com/Andrey582/NotificationBot");
 
         String result = handler.handleCommand(update).getParameters().get("text").toString();
-        String expected = "some_link была удалена.";
+        String expected = "https://github.com/Andrey582/NotificationBot была удалена.";
 
         assertThat(result)
             .isEqualTo(expected);

@@ -9,33 +9,25 @@ import edu.java.bot.commands.StartCommand;
 import edu.java.bot.commands.TrackCommand;
 import edu.java.bot.commands.UntrackCommand;
 import java.util.List;
+import edu.java.bot.configuration.BotConfig;
+import edu.java.bot.configuration.LinkValidatorConfig;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@SpringBootTest(classes = BotApplication.class)
 public class TrackCommandTest {
 
+    @Autowired
     private MessageHandler handler;
-
-    @BeforeAll
-    public void init() {
-        handler = new MessageHandler();
-        ReflectionTestUtils.setField(
-            handler,
-            "commands",
-            List.of(
-                new StartCommand(),
-                new HelpCommand(),
-                new TrackCommand(),
-                new UntrackCommand(),
-                new ListCommand()
-            )
-        );
-    }
 
     @Test
     public void trackCommandTest() {
@@ -45,10 +37,10 @@ public class TrackCommandTest {
         Mockito.when(update.message()).thenReturn(message);
         Mockito.when(message.chat()).thenReturn(chat);
         Mockito.when(chat.id()).thenReturn(1L);
-        Mockito.when(message.text()).thenReturn("/track some_link");
+        Mockito.when(message.text()).thenReturn("/track https://github.com/Andrey582/NotificationBot");
 
         String result = handler.handleCommand(update).getParameters().get("text").toString();
-        String expected = "some_link была добавлена.";
+        String expected = "https://github.com/Andrey582/NotificationBot была добавлена.";
 
         assertThat(result)
             .isEqualTo(expected);
