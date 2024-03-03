@@ -2,11 +2,13 @@ package edu.java.controller;
 
 import edu.java.dto.ListLinkResponseDto;
 import edu.java.dto.ListLinkResponseDto.LinkResponseDto;
+import edu.java.exception.exception.LinkAlreadyTrackedException;
 import edu.java.exception.exception.UserHasNoLinkException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,6 +38,11 @@ public class LinkController {
     public ResponseEntity<LinkResponseDto> addLink(@RequestHeader("id") Long id, @RequestBody LinkResponseDto body) {
         if (!linkStub.containsKey(id)) {
             linkStub.put(id, new ArrayList<>());
+        }
+        Optional<LinkResponseDto> findLinkInArray =
+            linkStub.get(id).stream().filter(e -> e.equals(body.url())).findFirst();
+        if (findLinkInArray.isPresent()) {
+            throw new LinkAlreadyTrackedException("Link already tracked");
         }
         LinkResponseDto linkResponseDto = new LinkResponseDto(id, body.url());
         linkStub.get(id).add(linkResponseDto);

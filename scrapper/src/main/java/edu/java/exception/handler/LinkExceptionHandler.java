@@ -1,6 +1,7 @@
 package edu.java.exception.handler;
 
 import edu.java.exception.ErrorMessage;
+import edu.java.exception.exception.LinkAlreadyTrackedException;
 import edu.java.exception.exception.UserHasNoLinkException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -18,6 +19,18 @@ public class LinkExceptionHandler {
     public ErrorMessage userHasNoLinkExceptionHandler(UserHasNoLinkException ex, WebRequest request) {
         return new ErrorMessage(
             "Can`t find user links.",
+            String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()),
+            ex.getClass().getName(),
+            ex.getMessage(),
+            Arrays.stream(ex.getStackTrace()).map(StackTraceElement::toString).collect(Collectors.toList())
+        );
+    }
+
+    @ExceptionHandler(LinkAlreadyTrackedException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    public ErrorMessage linkAlreadyTrackedExceptionHandler(UserHasNoLinkException ex, WebRequest request) {
+        return new ErrorMessage(
+            "Can`t add link.",
             String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()),
             ex.getClass().getName(),
             ex.getMessage(),
