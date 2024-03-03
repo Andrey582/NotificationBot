@@ -2,6 +2,9 @@ package edu.java.bot.commands;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
+import edu.java.bot.validate.LinkValidator;
+import java.net.URI;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +14,9 @@ public class UntrackCommand implements Command {
     private static final String COMMAND = "/untrack";
     private static final String COMMAND_DESCRIPTION = "Команда удаляет отслеживаемую ссылку.\n"
         + "(/untrack link | name). Используте ссылку или ее название.";
+
+    @Autowired
+    private LinkValidator linkValidator;
 
     @Override
     public String command() {
@@ -36,6 +42,7 @@ public class UntrackCommand implements Command {
             return INCORRECT_LENGTH;
         }
         String link = msg[1];
-        return link + " была удалена.";
+        URI validate = linkValidator.validate(link);
+        return validate != null ? link + " была удалена." : "Ссылка не поддерживается.";
     }
 }

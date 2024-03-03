@@ -6,6 +6,10 @@ app:
   stackoverflowBaseUrl: https://api.stackexchange.com/2.3
   githubBaseUrl: https://api.github.com
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+
 spring:
   application:
     name: scrapper

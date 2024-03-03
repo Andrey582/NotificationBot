@@ -2,6 +2,9 @@ package edu.java.bot.commands;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
+import edu.java.bot.validate.LinkValidator;
+import java.net.URI;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +14,9 @@ public class TrackCommand implements Command {
     private static final String COMMAND = "/track";
     private static final String COMMAND_DESCRIPTION = "Команда добавляет ссылку для отслеживания.\n"
         + "(/track link [name]). name - необязательный параметр.";
+
+    @Autowired
+    private LinkValidator linkValidator;
 
     @Override
     public String command() {
@@ -37,6 +43,7 @@ public class TrackCommand implements Command {
             return INCORRECT_LENGTH;
         }
         String link = msg[1];
-        return link + " была добавлена.";
+        URI validate = linkValidator.validate(link);
+        return validate != null ? validate + " была добавлена." : "Ссылка не поддерживается";
     }
 }
