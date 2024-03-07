@@ -53,7 +53,7 @@ class StackOverflowQuestionClientTest {
 
         startServer();
 
-        List<StackOverflowResponseDto.StackOverflowItem> body = stackOverflowController.getQuestionById("123456")
+        List<StackOverflowResponseDto.StackOverflowItem> body = stackOverflowController.getQuestionById(123456L)
             .block().items();
 
         assertThat(body.get(0).lastActivity()).isEqualTo(first);

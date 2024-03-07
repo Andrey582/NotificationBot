@@ -6,18 +6,18 @@ import java.util.List;
 
 public record ListLinkResponseDto(
 
-    @JsonProperty("links")
+    @JsonProperty(value = "links", required = true)
     List<LinkResponseDto> links,
 
-    @JsonProperty("size")
+    @JsonProperty(value = "size", required = true)
     Integer size
 ) {
     public record LinkResponseDto(
 
-        @JsonProperty("id")
+        @JsonProperty(value = "id", required = true)
         Long id,
 
-        @JsonProperty("url")
+        @JsonProperty(value = "url", required = true)
         URI url
     ) {
     }

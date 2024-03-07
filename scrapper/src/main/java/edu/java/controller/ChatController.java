@@ -1,9 +1,7 @@
 package edu.java.controller;
 
-import edu.java.exception.exception.UserAlreadyRegisteredException;
-import edu.java.exception.exception.UserNotRegisteredException;
-import java.util.ArrayList;
-import java.util.List;
+import edu.java.service.ChatService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,23 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("tg-chat/{id}")
 public class ChatController {
 
-    List<Long> usersStub = new ArrayList<>();
+    @Autowired
+    ChatService chatService;
 
     @PostMapping
     public ResponseEntity<Void> createUser(@PathVariable Long id) {
-        if (usersStub.contains(id)) {
-            throw new UserAlreadyRegisteredException("User already registered.");
-        }
-        usersStub.add(id);
+        chatService.create(id);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @DeleteMapping
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        if (!usersStub.contains(id)) {
-            throw new UserNotRegisteredException("User not registered.");
-        }
-        usersStub.remove(id);
+        chatService.delete(id);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }
