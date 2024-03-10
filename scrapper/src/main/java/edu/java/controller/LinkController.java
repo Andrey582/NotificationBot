@@ -1,8 +1,8 @@
 package edu.java.controller;
 
 import edu.java.dto.request.LinkRequestDto;
-import edu.java.dto.response.ListLinkResponseDto;
 import edu.java.dto.response.LinkResponseDto;
+import edu.java.dto.response.ListLinkResponseDto;
 import edu.java.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

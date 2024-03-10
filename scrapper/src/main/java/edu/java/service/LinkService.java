@@ -1,8 +1,8 @@
 package edu.java.service;
 
 import edu.java.dto.request.LinkRequestDto;
-import edu.java.dto.response.ListLinkResponseDto;
 import edu.java.dto.response.LinkResponseDto;
+import edu.java.dto.response.ListLinkResponseDto;
 import edu.java.exception.exception.LinkAlreadyTrackedException;
 import edu.java.exception.exception.UserHasNoLinkException;
 import java.util.ArrayList;

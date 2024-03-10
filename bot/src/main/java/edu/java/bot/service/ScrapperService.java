@@ -3,7 +3,6 @@ package edu.java.bot.service;
 import edu.java.bot.dto.request.LinkRequestDto;
 import edu.java.bot.dto.response.LinkResponseDto;
 import edu.java.bot.dto.response.ListLinkResponseDto;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
