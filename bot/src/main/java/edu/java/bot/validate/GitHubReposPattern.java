@@ -9,7 +9,7 @@ public class GitHubReposPattern extends LinkValidator {
     }
 
     @Override
-    protected Pattern getPatter() {
+    protected Pattern getPattern() {
         return Pattern.compile("https://github.com/[\\w+|-]+/[\\w+|-]+");
     }
 }

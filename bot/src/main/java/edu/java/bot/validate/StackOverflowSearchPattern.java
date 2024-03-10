@@ -8,7 +8,7 @@ public class StackOverflowSearchPattern extends LinkValidator {
     }
 
     @Override
-    protected Pattern getPatter() {
+    protected Pattern getPattern() {
         return Pattern.compile("https://stackoverflow.com/search\\?q=[\\w+|+]+");
     }
 }

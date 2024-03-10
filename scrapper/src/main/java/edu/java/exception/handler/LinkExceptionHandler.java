@@ -19,7 +19,7 @@ public class LinkExceptionHandler {
     public ErrorMessage userHasNoLinkExceptionHandler(UserHasNoLinkException ex, WebRequest request) {
         return new ErrorMessage(
             "Can`t find user links.",
-            String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()),
+            String.valueOf(HttpStatus.NOT_FOUND.value()),
             ex.getClass().getName(),
             ex.getMessage(),
             Arrays.stream(ex.getStackTrace()).map(StackTraceElement::toString).collect(Collectors.toList())
@@ -27,11 +27,11 @@ public class LinkExceptionHandler {
     }
 
     @ExceptionHandler(LinkAlreadyTrackedException.class)
-    @ResponseStatus(value = HttpStatus.CONFLICT)
-    public ErrorMessage linkAlreadyTrackedExceptionHandler(UserHasNoLinkException ex, WebRequest request) {
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErrorMessage linkAlreadyTrackedExceptionHandler(LinkAlreadyTrackedException ex, WebRequest request) {
         return new ErrorMessage(
             "Can`t add link.",
-            String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()),
+            String.valueOf(HttpStatus.UNPROCESSABLE_ENTITY.value()),
             ex.getClass().getName(),
             ex.getMessage(),
             Arrays.stream(ex.getStackTrace()).map(StackTraceElement::toString).collect(Collectors.toList())

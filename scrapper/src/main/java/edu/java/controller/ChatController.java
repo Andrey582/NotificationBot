@@ -2,7 +2,6 @@ package edu.java.controller;
 
 import edu.java.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,12 +19,12 @@ public class ChatController {
     @PostMapping
     public ResponseEntity<Void> createUser(@PathVariable Long id) {
         chatService.create(id);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         chatService.delete(id);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 }

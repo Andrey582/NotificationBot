@@ -1,10 +1,10 @@
 package edu.java.controller;
 
-import edu.java.dto.ListLinkResponseDto;
-import edu.java.dto.ListLinkResponseDto.LinkResponseDto;
+import edu.java.dto.request.LinkRequestDto;
+import edu.java.dto.response.LinkResponseDto;
+import edu.java.dto.response.ListLinkResponseDto;
 import edu.java.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,18 +24,18 @@ public class LinkController {
     @GetMapping
     public ResponseEntity<ListLinkResponseDto> getAllLinks(@RequestHeader("id") Long id) {
         ListLinkResponseDto listLinkResponseDto = linkService.getAll(id);
-        return new ResponseEntity<>(listLinkResponseDto, HttpStatus.OK);
+        return ResponseEntity.ok(listLinkResponseDto);
     }
 
     @PostMapping
-    public ResponseEntity<LinkResponseDto> addLink(@RequestHeader("id") Long id, @RequestBody LinkResponseDto body) {
+    public ResponseEntity<LinkResponseDto> addLink(@RequestHeader("id") Long id, @RequestBody LinkRequestDto body) {
         LinkResponseDto linkResponseDto = linkService.create(id, body);
-        return new ResponseEntity<>(linkResponseDto, HttpStatus.OK);
+        return ResponseEntity.ok(linkResponseDto);
     }
 
     @DeleteMapping
-    public ResponseEntity<LinkResponseDto> deleteLink(@RequestHeader("id") Long id, @RequestBody LinkResponseDto body) {
+    public ResponseEntity<LinkResponseDto> deleteLink(@RequestHeader("id") Long id, @RequestBody LinkRequestDto body) {
         LinkResponseDto linkResponseDto = linkService.delete(id, body);
-        return new ResponseEntity<>(linkResponseDto, HttpStatus.OK);
+        return ResponseEntity.ok(linkResponseDto);
     }
 }

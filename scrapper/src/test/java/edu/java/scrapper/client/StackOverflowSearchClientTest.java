@@ -3,7 +3,7 @@ package edu.java.scrapper.client;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import edu.java.ScrapperApplication;
 import edu.java.controller.StackOverflowController;
-import edu.java.dto.StackOverflowResponseDto;
+import edu.java.dto.response.StackOverflowResponseItem;
 import java.time.OffsetDateTime;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -51,7 +51,7 @@ class StackOverflowSearchClientTest {
 
         startServer();
 
-        List<StackOverflowResponseDto.StackOverflowItem> body = stackOverflowController.getSearch("test")
+        List<StackOverflowResponseItem> body = stackOverflowController.getSearch("test")
             .block().items();
 
         assertThat(body.get(0).lastActivity()).isEqualTo(first);

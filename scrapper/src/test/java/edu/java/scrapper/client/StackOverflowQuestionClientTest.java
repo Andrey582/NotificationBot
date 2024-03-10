@@ -2,13 +2,10 @@ package edu.java.scrapper.client;
 
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import edu.java.ScrapperApplication;
-import edu.java.controller.GitHubController;
 import edu.java.controller.StackOverflowController;
-import edu.java.dto.GitHubResponseDto;
 import java.time.OffsetDateTime;
 import java.util.List;
-import edu.java.dto.StackOverflowResponseDto;
-import edu.java.dto.StackOverflowResponseDto.StackOverflowItem;
+import edu.java.dto.response.StackOverflowResponseItem;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -53,7 +50,7 @@ class StackOverflowQuestionClientTest {
 
         startServer();
 
-        List<StackOverflowResponseDto.StackOverflowItem> body = stackOverflowController.getQuestionById(123456L)
+        List<StackOverflowResponseItem> body = stackOverflowController.getQuestionById(123456L)
             .block().items();
 
         assertThat(body.get(0).lastActivity()).isEqualTo(first);
