@@ -1,14 +1,11 @@
 package edu.java.scrapper.client;
 
-import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import edu.java.ScrapperApplication;
-import edu.java.controller.GitHubController;
 import edu.java.controller.StackOverflowController;
-import edu.java.dto.GitHubResponseDto;
+import edu.java.dto.StackOverflowResponseDto;
 import java.time.OffsetDateTime;
 import java.util.List;
-import edu.java.dto.StackOverflowResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
