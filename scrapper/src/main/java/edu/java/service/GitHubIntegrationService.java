@@ -1,6 +1,6 @@
 package edu.java.service;
 
-import edu.java.dto.GitHubResponseDto;
+import edu.java.dto.response.GitHubResponseDto;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

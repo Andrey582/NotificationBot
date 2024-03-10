@@ -20,12 +20,12 @@ public class ChatController {
     @PostMapping
     public ResponseEntity<Void> createUser(@PathVariable Long id) {
         chatService.create(id);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         chatService.delete(id);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 }

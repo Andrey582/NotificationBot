@@ -8,7 +8,7 @@ public class StackOverflowQuestionPattern extends LinkValidator {
     }
 
     @Override
-    protected Pattern getPatter() {
+    protected Pattern getPattern() {
         return Pattern.compile("https://stackoverflow.com/questions/\\d+");
     }
 }

@@ -1,6 +1,6 @@
 package edu.java.controller;
 
-import edu.java.dto.StackOverflowResponseDto;
+import edu.java.dto.response.StackOverflowResponseDto;
 import edu.java.service.StackOverflowIntegrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

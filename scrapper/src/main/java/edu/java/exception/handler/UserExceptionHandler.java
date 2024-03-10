@@ -15,11 +15,11 @@ import org.springframework.web.context.request.WebRequest;
 public class UserExceptionHandler {
 
     @ExceptionHandler(UserAlreadyRegisteredException.class)
-    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorMessage userAlreadyRegisteredExceptionHandler(UserAlreadyRegisteredException ex, WebRequest request) {
         return new ErrorMessage(
             "Can`t register user.",
-            String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()),
+            String.valueOf(HttpStatus.BAD_REQUEST.value()),
             ex.getClass().getName(),
             ex.getMessage(),
             Arrays.stream(ex.getStackTrace()).map(StackTraceElement::toString).collect(Collectors.toList())
@@ -27,11 +27,11 @@ public class UserExceptionHandler {
     }
 
     @ExceptionHandler(UserNotRegisteredException.class)
-    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorMessage userNotRegisteredExceptionHandler(UserNotRegisteredException ex, WebRequest request) {
         return new ErrorMessage(
             "Can`t delete user.",
-            String.valueOf(HttpStatus.NOT_ACCEPTABLE.value()),
+            String.valueOf(HttpStatus.BAD_REQUEST.value()),
             ex.getClass().getName(),
             ex.getMessage(),
             Arrays.stream(ex.getStackTrace()).map(StackTraceElement::toString).collect(Collectors.toList())

@@ -5,6 +5,7 @@ app:
     force-check-delay: 10s
   stackoverflowBaseUrl: http://localhost:8080/2.3
   githubBaseUrl: http://localhost:8080
+  botBaseUrl: ${BOT_BASE_URL}
 
 spring:
   application:

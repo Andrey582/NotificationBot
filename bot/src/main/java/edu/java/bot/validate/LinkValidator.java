@@ -16,10 +16,10 @@ public abstract class LinkValidator {
         this.nextValidator = nextValidator;
     }
 
-    protected abstract Pattern getPatter();
+    protected abstract Pattern getPattern();
 
     public URI validate(String url) {
-        Matcher matcher = getPatter().matcher(url);
+        Matcher matcher = getPattern().matcher(url);
         if (matcher.find()) {
             try {
                 return new URI(url);

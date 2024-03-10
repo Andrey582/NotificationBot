@@ -1,5 +1,6 @@
 app:
   telegram-token: ${TELEGRAM_BOT_TOKEN}
+  scrapperUrl: ${SCRAPPER_BASE_URL}
 
 spring:
   application:

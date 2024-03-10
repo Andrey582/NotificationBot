@@ -1,6 +1,6 @@
 package edu.java.controller;
 
-import edu.java.dto.GitHubResponseDto;
+import edu.java.dto.response.GitHubResponseDto;
 import edu.java.service.GitHubIntegrationService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
