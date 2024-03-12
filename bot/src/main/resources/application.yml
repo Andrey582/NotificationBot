@@ -1,11 +1,16 @@
 app:
-  telegram-token: unset
+  telegram-token: ${TELEGRAM_BOT_TOKEN}
+  scrapperUrl: ${SCRAPPER_BASE_URL}
 
 spring:
   application:
     name: bot
   jackson:
     time-zone: UTC
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
 
 server:
   port: 8090

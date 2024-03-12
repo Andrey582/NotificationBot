@@ -1,8 +1,15 @@
 app:
   scheduler:
-    enable: true
+    enable: false
     interval: 10s
     force-check-delay: 10s
+  stackoverflowBaseUrl: https://api.stackexchange.com/2.3
+  githubBaseUrl: https://api.github.com
+  botBaseUrl: ${BOT_BASE_URL}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
 
 spring:
   application:
