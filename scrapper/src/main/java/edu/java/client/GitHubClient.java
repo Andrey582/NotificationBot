@@ -11,9 +11,11 @@ public class GitHubClient implements Client {
 
     private static final String BASE_GITHUB_URL = "https://api.github.com";
     private final String baseUrl;
+    private final String token;
 
     public GitHubClient(ApplicationConfig applicationConfig) {
         baseUrl = Objects.requireNonNullElse(applicationConfig.githubBaseUrl(), BASE_GITHUB_URL);
+        token = applicationConfig.githubAccessToken();
     }
 
     @Override
@@ -22,6 +24,7 @@ public class GitHubClient implements Client {
         return WebClient
             .builder()
             .baseUrl(baseUrl)
+            .defaultHeader("Authorization", "token " + token)
             .build();
     }
 

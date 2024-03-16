@@ -6,10 +6,16 @@ app:
   stackoverflowBaseUrl: http://localhost:8080/2.3
   githubBaseUrl: http://localhost:8080
   botBaseUrl: ${BOT_BASE_URL}
+  github-access-token: ${GIT_HUB_ACCESS_TOKEN}
 
 spring:
   application:
     name: scrapper
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driverClassName: org.postgresql.Driver
 
 server:
   port: 8080

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 @Component
 public class HelpCommand implements Command {
@@ -26,12 +27,14 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public SendMessage handle(Update update) {
-        return new SendMessage(
-            update.message().chat().id(),
-            availableCommands.stream()
+    public Mono<SendMessage> handle(Update update) {
+        return Mono.just(
+            new SendMessage(
+                update.message().chat().id(),
+                availableCommands.stream()
                     .map(e -> e.command() + "\n" + e.description())
                     .collect(Collectors.joining("\n\n"))
+            )
         );
     }
 

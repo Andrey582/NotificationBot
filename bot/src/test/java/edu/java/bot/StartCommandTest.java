@@ -9,27 +9,24 @@ import edu.java.bot.commands.StartCommand;
 import edu.java.bot.commands.TrackCommand;
 import edu.java.bot.commands.UntrackCommand;
 import java.util.List;
+import edu.java.bot.service.ScrapperService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
+import reactor.core.publisher.Mono;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootTest(classes = BotApplication.class)
 public class StartCommandTest {
+
+    @Autowired
+    MessageHandler handler;
 
     @Test
     public void startCommandTest() {
-        MessageHandler handler = new MessageHandler();
-        ReflectionTestUtils.setField(
-            handler,
-            "commands",
-            List.of(
-                new StartCommand(),
-                new HelpCommand(),
-                new TrackCommand(),
-                new UntrackCommand(),
-                new ListCommand()
-            )
-        );
         Update update = Mockito.mock(Update.class);
         Message message = Mockito.mock(Message.class);
         Chat chat = Mockito.mock(Chat.class);
@@ -37,10 +34,11 @@ public class StartCommandTest {
         Mockito.when(message.chat()).thenReturn(chat);
         Mockito.when(chat.id()).thenReturn(1L);
         Mockito.when(message.text()).thenReturn("/start");
+        ScrapperService scrapperService = Mockito.mock(ScrapperService.class);
+        Mockito.when(scrapperService.registerUser(1L)).thenReturn(Mono.just(ResponseEntity.ok().build()));
 
-        String result = handler.handleCommand(update).getParameters().get("text").toString();
-        String expected = "Привет, я бот для отслеживания изменений по ссылкам," +
-            " которые ты мне скинешь. О моих возможностях ты можешь узнать используя команду /help.";
+        String result = handler.handleCommand(update).block().getParameters().get("text").toString();
+        String expected = "Вы уже зарегистрированы.";
 
         assertThat(result)
             .isEqualTo(expected);

@@ -39,8 +39,8 @@ public class TrackCommandTest {
         Mockito.when(chat.id()).thenReturn(1L);
         Mockito.when(message.text()).thenReturn("/track https://github.com/Andrey582/NotificationBot");
 
-        String result = handler.handleCommand(update).getParameters().get("text").toString();
-        String expected = "https://github.com/Andrey582/NotificationBot была добавлена.";
+        String result = handler.handleCommand(update).block().getParameters().get("text").toString();
+        String expected = "Ссылка уже отслеживается или имеется ссылка с таким названием.";
 
         assertThat(result)
             .isEqualTo(expected);
@@ -56,7 +56,7 @@ public class TrackCommandTest {
         Mockito.when(chat.id()).thenReturn(1L);
         Mockito.when(message.text()).thenReturn("/track");
 
-        String result = handler.handleCommand(update).getParameters().get("text").toString();
+        String result = handler.handleCommand(update).block().getParameters().get("text").toString();
         String expected = "Команда должна иметь вид \'/track link [name]\'.";
 
         assertThat(result)
