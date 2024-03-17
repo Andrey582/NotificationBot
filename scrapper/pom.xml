@@ -85,6 +85,13 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Jooq -->
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-codegen</artifactId>
+            <version>3.18.7</version>
+        </dependency>
+
         <!-- Tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

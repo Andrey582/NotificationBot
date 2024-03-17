@@ -1,11 +1,11 @@
 package edu.java.service.jdbc;
 
-import edu.java.database.model.Chat;
-import edu.java.database.model.ChatToLink;
-import edu.java.database.model.Link;
-import edu.java.database.repository.ChatRepository;
-import edu.java.database.repository.ChatToLinkRepository;
-import edu.java.database.repository.LinkRepository;
+import edu.java.database.jdbc.JdbcChatRepository;
+import edu.java.database.jdbc.JdbcChatToLinkRepository;
+import edu.java.database.jdbc.JdbcLinkRepository;
+import edu.java.database.jdbc.model.Chat;
+import edu.java.database.jdbc.model.ChatToLink;
+import edu.java.database.jdbc.model.Link;
 import edu.java.dto.request.LinkRequestDto;
 import edu.java.dto.response.LinkResponseDto;
 import edu.java.dto.response.ListLinkResponseDto;
@@ -16,30 +16,29 @@ import edu.java.exception.exception.UserNotRegisteredException;
 import edu.java.service.LinkService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @SuppressWarnings("MultipleStringLiterals")
-@Service
+//@Service
 public class JdbcLinkService implements LinkService {
 
     @Autowired
-    LinkRepository linkRepository;
+    JdbcLinkRepository jdbcLinkRepository;
     @Autowired
-    ChatRepository chatRepository;
+    JdbcChatRepository jdbcChatRepository;
     @Autowired
-    ChatToLinkRepository chatToLinkRepository;
+    JdbcChatToLinkRepository jdbcChatToLinkRepository;
 
     @Override
     public LinkResponseDto create(Long chatId, LinkRequestDto body) {
-        Chat chat = chatRepository.findChatById(chatId);
+        Chat chat = jdbcChatRepository.findChatById(chatId);
         if (chat == null) {
             throw new UserNotRegisteredException("Can`t find user.");
         }
-        Link link = linkRepository.add(body.link());
+        Link link = jdbcLinkRepository.add(body.link());
         if (link == null) {
-            link = linkRepository.findLinkByUrl(body.link());
+            link = jdbcLinkRepository.findLinkByUrl(body.link());
         }
-        if (!chatToLinkRepository.add(chat.getId(), link.getId(), body.name())) {
+        if (!jdbcChatToLinkRepository.add(chat.getId(), link.getId(), body.name())) {
             throw new LinkAlreadyTrackedException("User already tracked this link.");
         }
         return new LinkResponseDto(chatId, link.getLinkUrl(), body.name());
@@ -47,18 +46,18 @@ public class JdbcLinkService implements LinkService {
 
     @Override
     public LinkResponseDto delete(Long chatId, LinkRequestDto body) {
-        Chat chat = chatRepository.findChatById(chatId);
+        Chat chat = jdbcChatRepository.findChatById(chatId);
 
-        if (chatRepository.findChatById(chatId) == null) {
+        if (jdbcChatRepository.findChatById(chatId) == null) {
             throw new UserNotRegisteredException("Can`t find user.");
         }
 
         Link link = null;
 
         if (body.link() != null) {
-            link = linkRepository.findLinkByUrl(body.link());
+            link = jdbcLinkRepository.findLinkByUrl(body.link());
         } else if (body.name() != null) {
-            ChatToLink chatToLink = chatToLinkRepository.findAllLinksByName(chat.getId(), body.name())
+            ChatToLink chatToLink = jdbcChatToLinkRepository.findAllLinksByName(chat.getId(), body.name())
                 .stream()
                 .findFirst()
                 .orElse(null);
@@ -69,12 +68,12 @@ public class JdbcLinkService implements LinkService {
             throw new LinkNotFoundException("Can`t find this link.");
         }
 
-        if (!chatToLinkRepository.remove(chat.getId(), link.getId())) {
+        if (!jdbcChatToLinkRepository.remove(chat.getId(), link.getId())) {
             throw new UserHasNoLinkException("User does not have this link.");
         }
 
-        if (chatToLinkRepository.findAllChatByLink(link.getId()).isEmpty()) {
-            linkRepository.remove(link.getLinkUrl());
+        if (jdbcChatToLinkRepository.findAllChatByLink(link.getId()).isEmpty()) {
+            jdbcLinkRepository.remove(link.getLinkUrl());
         }
 
         return new LinkResponseDto(chatId, link.getLinkUrl(), body.name());
@@ -82,12 +81,12 @@ public class JdbcLinkService implements LinkService {
 
     @Override
     public ListLinkResponseDto getAll(Long chatId) {
-        Chat chat = chatRepository.findChatById(chatId);
+        Chat chat = jdbcChatRepository.findChatById(chatId);
         if (chat == null) {
             throw new UserNotRegisteredException("Can`t find user.");
         }
 
-        List<ChatToLink> links = chatToLinkRepository
+        List<ChatToLink> links = jdbcChatToLinkRepository
             .findAllLinkByChat(chat.getId());
         if (links.isEmpty()) {
             throw new UserHasNoLinkException("Links are empty.");

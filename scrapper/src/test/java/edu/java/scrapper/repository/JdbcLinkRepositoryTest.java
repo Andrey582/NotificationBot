@@ -1,6 +1,6 @@
 package edu.java.scrapper.repository;
 
-import edu.java.database.repository.jdbc.JdbcLinkRepository;
+import edu.java.database.jdbc.JdbcLinkRepository;
 import edu.java.scrapper.IntegrationTest;
 import java.net.URI;
 import java.net.URISyntaxException;

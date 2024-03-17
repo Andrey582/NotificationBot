@@ -1,10 +1,10 @@
 package edu.java.scrapper.repository;
 
-import edu.java.database.model.Chat;
-import edu.java.database.model.Link;
-import edu.java.database.repository.jdbc.JdbcChatRepository;
-import edu.java.database.repository.jdbc.JdbcChatToLinkRepository;
-import edu.java.database.repository.jdbc.JdbcLinkRepository;
+import edu.java.database.jdbc.JdbcChatRepository;
+import edu.java.database.jdbc.JdbcChatToLinkRepository;
+import edu.java.database.jdbc.JdbcLinkRepository;
+import edu.java.database.jdbc.model.Chat;
+import edu.java.database.jdbc.model.Link;
 import edu.java.scrapper.IntegrationTest;
 import java.net.URI;
 import java.net.URISyntaxException;

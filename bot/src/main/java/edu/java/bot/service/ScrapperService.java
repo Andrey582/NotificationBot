@@ -18,6 +18,7 @@ public class ScrapperService {
 
     private static final String USER_PATH = "/tg-chat/";
     private static final String LINK_PATH = "/links";
+
     @Autowired
     WebClient scrapperClient;
 

@@ -1,4 +1,4 @@
-package edu.java.database.model;
+package edu.java.database.jdbc.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

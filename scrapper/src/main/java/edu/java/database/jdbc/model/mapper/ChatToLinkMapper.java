@@ -1,13 +1,14 @@
-package edu.java.database.model.mapper;
+package edu.java.database.jdbc.model.mapper;
 
-import edu.java.database.model.Chat;
-import edu.java.database.model.ChatToLink;
-import edu.java.database.model.Link;
+import edu.java.database.jdbc.model.Chat;
+import edu.java.database.jdbc.model.ChatToLink;
+import edu.java.database.jdbc.model.Link;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
+
 import org.springframework.jdbc.core.RowMapper;
 
 public class ChatToLinkMapper implements RowMapper<ChatToLink> {

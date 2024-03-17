@@ -1,6 +1,6 @@
-package edu.java.database.repository;
+package edu.java.database;
 
-import edu.java.database.model.Link;
+import edu.java.database.jdbc.model.Link;
 import java.net.URI;
 import java.time.Duration;
 import java.util.List;

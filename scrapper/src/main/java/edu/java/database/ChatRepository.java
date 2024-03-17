@@ -1,6 +1,6 @@
-package edu.java.database.repository;
+package edu.java.database;
 
-import edu.java.database.model.Chat;
+import edu.java.database.jdbc.model.Chat;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 

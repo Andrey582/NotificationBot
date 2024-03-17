@@ -1,6 +1,6 @@
 package edu.java.scrapper.repository;
 
-import edu.java.database.repository.jdbc.JdbcChatRepository;
+import edu.java.database.jdbc.JdbcChatRepository;
 import edu.java.scrapper.IntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class JdbcChatRepositoryTest extends IntegrationTest {
     @Transactional
     @Rollback
     public void addTest() {
-        assertThat(jdbcChatRepository.add(1234L)).isNotNull();
+        assertThat(jdbcChatRepository.add(123L)).isNotNull();
     }
 
     @Test

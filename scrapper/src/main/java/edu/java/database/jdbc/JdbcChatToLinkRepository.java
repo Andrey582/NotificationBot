@@ -1,8 +1,7 @@
-package edu.java.database.repository.jdbc;
+package edu.java.database.jdbc;
 
-import edu.java.database.model.ChatToLink;
-import edu.java.database.model.mapper.ChatToLinkMapper;
-import edu.java.database.repository.ChatToLinkRepository;
+import edu.java.database.jdbc.model.ChatToLink;
+import edu.java.database.jdbc.model.mapper.ChatToLinkMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,12 +9,11 @@ import org.springframework.stereotype.Repository;
 
 @SuppressWarnings("MultipleStringLiterals")
 @Repository
-public class JdbcChatToLinkRepository implements ChatToLinkRepository {
+public class JdbcChatToLinkRepository {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @Override
     public boolean add(Long chatId, Long linkId, String name) {
         return jdbcTemplate.update(
             "insert into chat_to_link (chat_id, link_id, name) values (?, ?, ?) on conflict do nothing ",
@@ -25,7 +23,6 @@ public class JdbcChatToLinkRepository implements ChatToLinkRepository {
         ) > 0;
     }
 
-    @Override
     public boolean remove(Long chatId, Long linkId) {
         return jdbcTemplate.update(
             "delete from chat_to_link where chat_id = ? and link_id = ?",
@@ -34,7 +31,6 @@ public class JdbcChatToLinkRepository implements ChatToLinkRepository {
         ) > 0;
     }
 
-    @Override
     public boolean remove(Long chatId, String name) {
         return jdbcTemplate.update(
             "delete from chat_to_link where chat_id = ? and name = ?",
@@ -43,7 +39,6 @@ public class JdbcChatToLinkRepository implements ChatToLinkRepository {
         ) > 0;
     }
 
-    @Override
     public List<ChatToLink> findAllLinkByChat(Long chatId) {
         return jdbcTemplate.query(
             "select chat.id as cid, chat.chat_id, "
@@ -56,7 +51,6 @@ public class JdbcChatToLinkRepository implements ChatToLinkRepository {
         );
     }
 
-    @Override
     public List<ChatToLink> findAllLinksByName(Long chatId, String name) {
         return jdbcTemplate.query(
             "select chat.id as cid, chat.chat_id, "
@@ -70,7 +64,6 @@ public class JdbcChatToLinkRepository implements ChatToLinkRepository {
         );
     }
 
-    @Override
     public List<ChatToLink> findAllChatByLink(Long linkId) {
         return jdbcTemplate.query(
             "select chat.id as cid, chat.chat_id, "
@@ -83,7 +76,6 @@ public class JdbcChatToLinkRepository implements ChatToLinkRepository {
         );
     }
 
-    @Override
     public List<ChatToLink> findAll() {
         return jdbcTemplate.query(
             "select chat.id as cid, chat.chat_id, "

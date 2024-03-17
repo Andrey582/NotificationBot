@@ -1,29 +1,30 @@
 package edu.java.updater;
 
 import edu.java.configuration.ApplicationConfig;
-import edu.java.database.jdbc.JdbcChatToLinkRepository;
-import edu.java.database.jdbc.JdbcLinkRepository;
-import edu.java.database.jdbc.model.Chat;
-import edu.java.database.jdbc.model.ChatToLink;
-import edu.java.database.jdbc.model.Link;
+import edu.java.database.jooq.repository.JooqChatToLinkRepository;
+import edu.java.database.jooq.repository.JooqLinkRepository;
+import edu.java.database.jooq.tables.pojos.Link;
+import edu.java.database.jooq.tables.records.ChatRecord;
+import edu.java.database.jooq.tables.records.ChatToLinkRecord;
 import edu.java.dto.request.BotLinkUpdateRequestDto;
 import edu.java.processor.LinkProcessor;
 import edu.java.service.BotService;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
+import lombok.SneakyThrows;
+import org.jooq.Record2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@Slf4j
-public class JdbcLinkUpdater implements LinkUpdater {
+public class JooqLinkUpdater implements LinkUpdater {
 
     @Autowired
-    JdbcLinkRepository jdbcLinkRepository;
+    JooqLinkRepository jooqLinkRepository;
     @Autowired
-    JdbcChatToLinkRepository jdbcChatToLinkRepository;
+    JooqChatToLinkRepository jooqChatToLinkRepository;
     @Autowired
     ApplicationConfig applicationConfig;
     @Autowired
@@ -31,21 +32,21 @@ public class JdbcLinkUpdater implements LinkUpdater {
     @Autowired
     BotService botService;
 
+    @SneakyThrows
     @Override
     public void update() {
-        List<Link> links = jdbcLinkRepository
+        List<Link> links = jooqLinkRepository
             .findByTime(applicationConfig.scheduler().forceCheckDelay());
 
         for (Link link : links) {
 
             Map<Long, String> info = new HashMap<>();
-
-            linkProcessor.processLink(link.getLinkUrl(), link.getLastCheckTime())
-                .doOnSuccess(e -> jdbcLinkRepository.updateLastCheck(link.getLinkUrl()))
+            URI uri = new URI(link.getLinkUrl());
+            linkProcessor.processLink(uri, link.getLastCheckTime())
+                .doOnSuccess(e -> jooqLinkRepository.updateLastCheck(uri))
                 .subscribe(e -> {
-                        for (ChatToLink chatToLink : jdbcChatToLinkRepository.findAllChatByLink(link.getId())) {
-                            Chat chat = chatToLink.getChat();
-                            info.put(chat.getChatId(), chatToLink.getName());
+                        for (Record2<ChatRecord, ChatToLinkRecord> chatToLink : jooqChatToLinkRepository.findAllChatByLink(link.getId())) {
+                            info.put(chatToLink.component1().getChatId(), chatToLink.component2().getName());
                         }
                         botService.sendLinkUpdate(new BotLinkUpdateRequestDto(
                                 link.getId(),

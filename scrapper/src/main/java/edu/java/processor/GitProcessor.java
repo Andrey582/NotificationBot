@@ -42,7 +42,7 @@ public class GitProcessor extends LinkProcessor {
                             link,
                             dtoList
                                 .stream()
-                                .map(GitHubResponseDto::type)
+                                .map(item -> checkUpdateType(item.type()))
                                 .collect(Collectors.joining("\n"))
                         );
                     }
@@ -55,5 +55,20 @@ public class GitProcessor extends LinkProcessor {
         String string = link.toString();
         Pattern pattern = Pattern.compile("https://github.com/[\\w+|-]+/[\\w+|-]+");
         return pattern.matcher(string).find();
+    }
+
+    private String checkUpdateType(String type) {
+        return switch (type) {
+            case "IssueCommentEvent" ->  "Новый комментарий.";
+            case "PushEvent" -> "Запушили коммит.";
+            case "CommitCommentEvent" -> "Прокомментирован коммит.";
+            case "CreateEvent" -> "Создана новая ветка или тэг.";
+            case "DeleteEvent" -> "Удалена ветка или тэг.";
+            case "ForkEvent" -> "Репозиторий был форкнут.";
+            case "PullRequestEvent" -> "Создан пулл реквест.";
+            case "PullRequestReviewEvent" -> "Произшло ревью пулл реквеста.";
+            case "PullRequestReviewCommentEvent" -> "Оставлен комментарий в пулл реквесте.";
+            default -> "Не удалось распознать тип обновления.";
+        };
     }
 }

@@ -1,6 +1,6 @@
-package edu.java.database.repository;
+package edu.java.database;
 
-import edu.java.database.model.ChatToLink;
+import edu.java.database.jdbc.model.ChatToLink;
 import jakarta.annotation.Nullable;
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
