@@ -9,5 +9,4 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Chat {
     Long id;
-    Long chatId;
 }

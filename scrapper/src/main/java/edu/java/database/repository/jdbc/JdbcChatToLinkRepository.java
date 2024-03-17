@@ -46,7 +46,7 @@ public class JdbcChatToLinkRepository implements ChatToLinkRepository {
     @Override
     public List<ChatToLink> findAllLinkByChat(Long chatId) {
         return jdbcTemplate.query(
-            "select chat.id as cid, chat.chat_id, "
+            "select chat.id as cid, "
                 + "link.id as lid, link.link_url, link.last_check_time, name from chat_to_link "
                 + "join chat on chat.id = chat_to_link.chat_id "
                 + "join link on link.id = chat_to_link.link_id "
@@ -59,7 +59,7 @@ public class JdbcChatToLinkRepository implements ChatToLinkRepository {
     @Override
     public List<ChatToLink> findAllLinksByName(Long chatId, String name) {
         return jdbcTemplate.query(
-            "select chat.id as cid, chat.chat_id, "
+            "select chat.id as cid, "
                 + "link.id as lid, link.link_url, link.last_check_time, name from chat_to_link "
                 + "join chat on chat.id = chat_to_link.chat_id "
                 + "join link on link.id = chat_to_link.link_id "
@@ -73,7 +73,7 @@ public class JdbcChatToLinkRepository implements ChatToLinkRepository {
     @Override
     public List<ChatToLink> findAllChatByLink(Long linkId) {
         return jdbcTemplate.query(
-            "select chat.id as cid, chat.chat_id, "
+            "select chat.id as cid, "
                 + "link.id as lid, link.link_url, link.last_check_time, name from chat_to_link "
                 + "join chat on chat.id = chat_to_link.chat_id "
                 + "join link on link.id = chat_to_link.link_id "
@@ -86,7 +86,7 @@ public class JdbcChatToLinkRepository implements ChatToLinkRepository {
     @Override
     public List<ChatToLink> findAll() {
         return jdbcTemplate.query(
-            "select chat.id as cid, chat.chat_id, "
+            "select chat.id as cid, "
                 + "link.id as lid, link.link_url, link.last_check_time, name from chat_to_link "
                 + "join chat on chat.id = chat_to_link.chat_id "
                 + "join link on link.id = chat_to_link.link_id",

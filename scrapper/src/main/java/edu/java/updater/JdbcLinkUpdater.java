@@ -45,7 +45,7 @@ public class JdbcLinkUpdater implements LinkUpdater {
                 .subscribe(e -> {
                         for (ChatToLink chatToLink : chatToLinkRepository.findAllChatByLink(link.getId())) {
                             Chat chat = chatToLink.getChat();
-                            info.put(chat.getChatId(), chatToLink.getName());
+                            info.put(chat.getId(), chatToLink.getName());
                         }
                         botService.sendLinkUpdate(new BotLinkUpdateRequestDto(
                                 link.getId(),
