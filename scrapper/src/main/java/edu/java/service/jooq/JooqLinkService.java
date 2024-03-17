@@ -34,6 +34,7 @@ public class JooqLinkService implements LinkService {
     JooqChatToLinkRepository jooqChatToLinkRepository;
 
     @SneakyThrows
+    @SuppressWarnings("MultipleStringLiterals")
     @Override
     public LinkResponseDto create(Long chatId, LinkRequestDto body) {
         Chat chat = jooqChatRepository.findChatById(chatId);
@@ -101,7 +102,11 @@ public class JooqLinkService implements LinkService {
             .stream()
             .map(link -> {
                 try {
-                    return new LinkResponseDto(chatId, new URI(link.component1().getLinkUrl()), link.component2().getName());
+                    return new LinkResponseDto(
+                        chatId,
+                        new URI(link.component1().getLinkUrl()),
+                        link.component2().getName());
+
                 } catch (URISyntaxException e) {
                     throw new RuntimeException(e);
                 }

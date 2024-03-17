@@ -8,7 +8,6 @@ import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
-
 import org.springframework.jdbc.core.RowMapper;
 
 public class ChatToLinkMapper implements RowMapper<ChatToLink> {

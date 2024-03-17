@@ -45,7 +45,8 @@ public class JooqLinkUpdater implements LinkUpdater {
             linkProcessor.processLink(uri, link.getLastCheckTime())
                 .doOnSuccess(e -> jooqLinkRepository.updateLastCheck(uri))
                 .subscribe(e -> {
-                        for (Record2<ChatRecord, ChatToLinkRecord> chatToLink : jooqChatToLinkRepository.findAllChatByLink(link.getId())) {
+                        for (Record2<ChatRecord, ChatToLinkRecord> chatToLink
+                            : jooqChatToLinkRepository.findAllChatByLink(link.getId())) {
                             info.put(chatToLink.component1().getChatId(), chatToLink.component2().getName());
                         }
                         botService.sendLinkUpdate(new BotLinkUpdateRequestDto(

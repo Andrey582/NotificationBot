@@ -21,31 +21,73 @@ public class JooqChatToLinkRepository {
     DSLContext dslContext;
 
     public boolean add(Long chatId, Long linkId, @Nullable String name) {
-        return dslContext.insertInto(CHAT_TO_LINK, CHAT_TO_LINK.CHAT_ID, CHAT_TO_LINK.LINK_ID, CHAT_TO_LINK.NAME).values(chatId, linkId, name).onConflictDoNothing().returning().stream().findAny().isPresent();
+        return dslContext
+            .insertInto(CHAT_TO_LINK, CHAT_TO_LINK.CHAT_ID, CHAT_TO_LINK.LINK_ID, CHAT_TO_LINK.NAME)
+            .values(chatId, linkId, name)
+            .onConflictDoNothing()
+            .returning()
+            .stream()
+            .findAny()
+            .isPresent();
     }
 
     public boolean remove(Long chatId, Long linkId) {
-        return dslContext.deleteFrom(CHAT_TO_LINK).where(CHAT_TO_LINK.CHAT_ID.eq(chatId).and(CHAT_TO_LINK.LINK_ID.eq(linkId))).returning().stream().findAny().isPresent();
+        return dslContext
+            .deleteFrom(CHAT_TO_LINK)
+            .where(CHAT_TO_LINK.CHAT_ID.eq(chatId).and(CHAT_TO_LINK.LINK_ID.eq(linkId)))
+            .returning()
+            .stream()
+            .findAny()
+            .isPresent();
     }
 
     public boolean remove(Long chatId, String name) {
-        return dslContext.deleteFrom(CHAT_TO_LINK).where(CHAT_TO_LINK.CHAT_ID.eq(chatId).and(CHAT_TO_LINK.NAME.eq(name))).returning().stream().findAny().isPresent();
+        return dslContext
+            .deleteFrom(CHAT_TO_LINK)
+            .where(CHAT_TO_LINK.CHAT_ID.eq(chatId).and(CHAT_TO_LINK.NAME.eq(name)))
+            .returning()
+            .stream()
+            .findAny()
+            .isPresent();
     }
 
     public List<Record2<LinkRecord, ChatToLinkRecord>> findAllLinkByChat(Long chatId) {
-        return dslContext.select(LINK, CHAT_TO_LINK).from(CHAT_TO_LINK).join(LINK).on(CHAT_TO_LINK.LINK_ID.eq(LINK.ID)).where(CHAT_TO_LINK.CHAT_ID.eq(chatId)).fetch();
+        return dslContext
+            .select(LINK, CHAT_TO_LINK)
+            .from(CHAT_TO_LINK)
+            .join(LINK)
+            .on(CHAT_TO_LINK.LINK_ID.eq(LINK.ID))
+            .where(CHAT_TO_LINK.CHAT_ID.eq(chatId))
+            .fetch();
     }
 
     public List<Link> findAllLinksByName(Long chatId, String name) {
-        return dslContext.select(LINK).from(CHAT_TO_LINK).join(LINK).on(CHAT_TO_LINK.LINK_ID.eq(LINK.ID)).where(CHAT_TO_LINK.CHAT_ID.eq(chatId).and(CHAT_TO_LINK.NAME.eq(name))).fetchInto(Link.class);
+        return dslContext
+            .select(LINK)
+            .from(CHAT_TO_LINK)
+            .join(LINK)
+            .on(CHAT_TO_LINK.LINK_ID.eq(LINK.ID))
+            .where(CHAT_TO_LINK.CHAT_ID.eq(chatId).and(CHAT_TO_LINK.NAME.eq(name)))
+            .fetchInto(Link.class);
     }
 
     public List<Record2<ChatRecord, ChatToLinkRecord>> findAllChatByLink(Long linkId) {
-        return dslContext.select(CHAT, CHAT_TO_LINK).from(CHAT_TO_LINK).join(CHAT).on(CHAT_TO_LINK.CHAT_ID.eq(CHAT.ID)).where(CHAT_TO_LINK.LINK_ID.eq(linkId)).fetch();
+        return dslContext
+            .select(CHAT, CHAT_TO_LINK)
+            .from(CHAT_TO_LINK)
+            .join(CHAT)
+            .on(CHAT_TO_LINK.CHAT_ID.eq(CHAT.ID))
+            .where(CHAT_TO_LINK.LINK_ID.eq(linkId))
+            .fetch();
     }
 
     public List<Record2<ChatRecord, LinkRecord>> findAll() {
-        return dslContext.select(CHAT, LINK).from(CHAT_TO_LINK).join(CHAT).on(CHAT.ID.eq(CHAT_TO_LINK.CHAT_ID)).join(LINK).on(LINK.ID.eq(
-            CHAT_TO_LINK.LINK_ID)).fetch();
+        return dslContext
+            .select(CHAT, LINK)
+            .from(CHAT_TO_LINK)
+            .join(CHAT)
+            .on(CHAT.ID.eq(CHAT_TO_LINK.CHAT_ID))
+            .join(LINK)
+            .on(LINK.ID.eq(CHAT_TO_LINK.LINK_ID)).fetch();
     }
 }

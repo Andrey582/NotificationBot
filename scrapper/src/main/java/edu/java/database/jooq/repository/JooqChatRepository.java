@@ -1,7 +1,7 @@
 package edu.java.database.jooq.repository;
 
-import java.util.List;
 import edu.java.database.jooq.tables.pojos.Chat;
+import java.util.List;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,19 +14,35 @@ public class JooqChatRepository {
     DSLContext dslContext;
 
     public Chat add(Long chatId) {
-        return dslContext.insertInto(CHAT, CHAT.CHAT_ID).values(chatId).onConflictDoNothing().returning().fetchOneInto(Chat.class);
+        return dslContext
+            .insertInto(CHAT, CHAT.CHAT_ID)
+            .values(chatId)
+            .onConflictDoNothing()
+            .returning()
+            .fetchOneInto(Chat.class);
     }
 
     public Chat remove(Long chatId) {
-        return dslContext.deleteFrom(CHAT).where(CHAT.CHAT_ID.eq(chatId)).returning().fetchOneInto(Chat.class);
+        return dslContext
+            .deleteFrom(CHAT)
+            .where(CHAT.CHAT_ID.eq(chatId))
+            .returning()
+            .fetchOneInto(Chat.class);
     }
 
     public Chat findChatById(Long chatId) {
-        return dslContext.select(CHAT).from(CHAT).where(CHAT.CHAT_ID.eq(chatId)).fetchOneInto(Chat.class);
+        return dslContext
+            .select(CHAT)
+            .from(CHAT)
+            .where(CHAT.CHAT_ID.eq(chatId))
+            .fetchOneInto(Chat.class);
 
     }
 
     public List<Chat> findAll() {
-        return dslContext.select(CHAT).from(CHAT).fetchInto(Chat.class);
+        return dslContext
+            .select(CHAT)
+            .from(CHAT)
+            .fetchInto(Chat.class);
     }
 }

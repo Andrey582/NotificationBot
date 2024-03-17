@@ -19,7 +19,7 @@ public class JdbcChatRepositoryTest extends IntegrationTest {
     @Transactional
     @Rollback
     public void addTest() {
-        assertThat(jdbcChatRepository.add(123L)).isNotNull();
+        assertThat(jdbcChatRepository.add(1234L)).isNotNull();
     }
 
     @Test
