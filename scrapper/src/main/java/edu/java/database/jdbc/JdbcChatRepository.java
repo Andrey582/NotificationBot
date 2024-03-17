@@ -15,7 +15,7 @@ public class JdbcChatRepository {
 
     public Chat add(Long chatId) {
         return jdbcTemplate.query(
-            "insert into chat(chat_id) values (?) on conflict do nothing returning *",
+            "insert into chat(id) values (?) on conflict do nothing returning *",
             new ChatMapper(),
             chatId)
             .stream()
@@ -25,7 +25,7 @@ public class JdbcChatRepository {
 
     public Chat remove(Long chatId) {
         return jdbcTemplate.query(
-            "delete from chat where chat_id = ? returning *",
+            "delete from chat where id = ? returning *",
             new ChatMapper(),
             chatId)
             .stream()
@@ -35,7 +35,7 @@ public class JdbcChatRepository {
 
     public Chat findChatById(Long chatId) {
         return jdbcTemplate.query(
-            "select * from chat where chat_id = ?",
+            "select * from chat where id = ?",
             new ChatMapper(),
             chatId)
             .stream()

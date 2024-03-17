@@ -48,7 +48,7 @@ public class JdbcLinkService implements LinkService {
     public LinkResponseDto delete(Long chatId, LinkRequestDto body) {
         Chat chat = jdbcChatRepository.findChatById(chatId);
 
-        if (jdbcChatRepository.findChatById(chatId) == null) {
+        if (chat == null) {
             throw new UserNotRegisteredException("Can`t find user.");
         }
 

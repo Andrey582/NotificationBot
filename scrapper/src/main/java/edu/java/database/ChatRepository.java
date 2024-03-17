@@ -13,8 +13,5 @@ public interface ChatRepository {
     Chat remove(Long chatId);
 
     @Transactional(readOnly = true)
-    Chat findChatById(Long chatId);
-
-    @Transactional(readOnly = true)
     List<Chat> findAll();
 }

@@ -9,25 +9,8 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="08-03-2024-create-table-chat" author="Ganushkin Andrey">
-        <sqlFile path="sql/CreateTableChat.sql"/>
-    </changeSet>
-    <changeSet id="08-03-2024-create-table-link" author="Ganushkin Andrey">
-        <sqlFile path="sql/CreateTableLink.sql"/>
-    </changeSet>
-    <changeSet id="08-03-2024-create-table-chat-to-link" author="Ganushkin Andrey">
-        <sqlFile path="sql/CreateTableChatToLink.sql"/>
-    </changeSet>
-    <changeSet id="13-03-2024-add-not-null-to-chat-to-link-table" author="Ganushkin Andrey">
-        <sqlFile path="sql/AddNotNullToChatToLinkTable.sql"/>
-    </changeSet>
-    <changeSet id="13-03-2024-transfer-name-from-link-to-chat-to-link" author="Ganushkin Andrey">
-        <sqlFile path="sql/TransferNameFromLinkToChatToLink.sql"/>
-    </changeSet>
-    <changeSet id="13-03-2024-add-unique-to-chat-to-link-table" author="Ganushkin Andrey">
-        <sqlFile path="sql/AddUniqueToChatToLinkTable.sql"/>
-    </changeSet>
-    <changeSet id="13-03-2024-insert-test-data" author="Ganushkin Andrey" context="@test">
-        <sqlFile path="sql/InsertTestData.sql"/>
-    </changeSet>
+    <include file="sql/CreateTableChat.sql"/>
+    <include file="sql/CreateTableLink.sql"/>
+    <include file="sql/CreateTableChatToLink.sql"/>
+    <include file="sql/InsertTestData.sql" context="@test"/>
 </databaseChangeLog>

@@ -4,15 +4,15 @@ import edu.java.database.jooq.tables.pojos.Link;
 import edu.java.database.jooq.tables.records.ChatRecord;
 import edu.java.database.jooq.tables.records.ChatToLinkRecord;
 import edu.java.database.jooq.tables.records.LinkRecord;
+import jakarta.annotation.Nullable;
 import java.util.List;
-import org.jetbrains.annotations.Nullable;
 import org.jooq.DSLContext;
 import org.jooq.Record2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import static edu.java.database.jooq.tables.Chat.CHAT;
 import static edu.java.database.jooq.tables.ChatToLink.CHAT_TO_LINK;
 import static edu.java.database.jooq.tables.Link.LINK;
+import static edu.java.database.jooq.tables.Chat.CHAT;
 
 @Repository
 public class JooqChatToLinkRepository {

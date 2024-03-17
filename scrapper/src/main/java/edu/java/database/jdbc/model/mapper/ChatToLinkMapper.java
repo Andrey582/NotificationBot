@@ -16,8 +16,7 @@ public class ChatToLinkMapper implements RowMapper<ChatToLink> {
         try {
             return new ChatToLink(
                 new Chat(
-                    resultSet.getLong("cid"),
-                    resultSet.getLong("chat_id")
+                    resultSet.getLong("cid")
                 ),
                 new Link(
                     resultSet.getLong("lid"),

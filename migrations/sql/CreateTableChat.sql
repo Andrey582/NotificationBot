@@ -1,7 +1,7 @@
+--changeSet Ganushkin-Andrey:08-03-2024-create-table-chat
+
 create table chat
 (
-    id bigint generated always as identity,
-    chat_id bigint not null,
-    primary key (id),
-    unique (chat_id)
+    id bigint not null,
+    primary key (id)
 )

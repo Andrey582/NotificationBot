@@ -1,4 +1,6 @@
-insert into chat (chat_id)
+--changeSet Ganushkin-Andrey:13-03-2024-insert-test-data
+
+insert into chat (id)
 values
     (123),
     (234),
@@ -13,9 +15,9 @@ values
 
 insert into chat_to_link (chat_id, link_id, name)
 values
-    (1, 1, 'test'),
-    (1, 2, 'secondtest'),
-    (1, 3, 'thirdtest'),
-    (2, 2, 'secondtest'),
-    (2, 3, null)
+    (123, 1, 'test'),
+    (123, 2, 'secondtest'),
+    (123, 3, 'thirdtest'),
+    (234, 2, 'secondtest'),
+    (234, 3, null)
 
