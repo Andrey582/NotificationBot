@@ -1,11 +1,10 @@
 package edu.java.database.jooq.repository;
 
 import edu.java.database.jooq.tables.pojos.Chat;
+import java.util.List;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import java.util.List;
-
 import static edu.java.database.jooq.tables.Chat.CHAT;
 
 @Repository
