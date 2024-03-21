@@ -1,4 +1,4 @@
-package edu.java.scrapper.repository;
+package edu.java.scrapper.repository.jdbc;
 
 import edu.java.database.jdbc.JdbcLinkRepository;
 import edu.java.scrapper.IntegrationTest;
