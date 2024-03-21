@@ -13,6 +13,6 @@ public interface LinkService {
     @Transactional
     LinkResponseDto delete(Long chatId, LinkRequestDto body);
 
-    @Transactional(readOnly = trueg)
+    @Transactional(readOnly = true)
     ListLinkResponseDto getAll(Long chatId);
 }
