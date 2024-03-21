@@ -37,10 +37,18 @@ public class JdbcChatToLinkRepositoryTest extends IntegrationTest {
     @Test
     @Transactional
     @Rollback
-    public void removeTest() throws URISyntaxException {
+    public void removeByUrlTest() throws URISyntaxException {
         Chat chat = jdbcChatRepository.findChatById(123L);
         Link link = jdbcLinkRepository.findLinkByUrl(new URI("http://test.com"));
         assertThat(jdbcChatToLinkRepository.remove(chat.getId(), link.getId())).isTrue();
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void removeByNameTest() throws URISyntaxException {
+        Chat chat = jdbcChatRepository.findChatById(123L);
+        assertThat(jdbcChatToLinkRepository.remove(chat.getId(), "test")).isTrue();
     }
 
     @Test
@@ -57,6 +65,14 @@ public class JdbcChatToLinkRepositoryTest extends IntegrationTest {
     public void findAllChatByLinkIdTest() throws URISyntaxException {
         Link link = jdbcLinkRepository.findLinkByUrl(new URI("http://test.com"));
         assertThat(jdbcChatToLinkRepository.findAllChatByLink(link.getId()).size()).isEqualTo(1);
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void findByNameTest() {
+        Chat chat = jdbcChatRepository.findChatById(123L);
+        assertThat(jdbcChatToLinkRepository.findAllLinksByName(chat.getId(), "test")).isNotNull();
     }
 
     @Test
