@@ -35,4 +35,11 @@ public class JdbcChatRepositoryTest extends IntegrationTest {
     public void findAllTest() {
         assertThat(jdbcChatRepository.findAll().size()).isEqualTo(3);
     }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void findByChatTest() {
+        assertThat(jdbcChatRepository.findChatById(123L)).isNotNull();
+    }
 }
