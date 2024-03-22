@@ -1,12 +1,12 @@
 package edu.java.dto.request;
 
 import java.net.URI;
-import java.util.List;
+import java.util.Map;
 
 public record BotLinkUpdateRequestDto(
     Long id,
     URI url,
     String description,
-    List<Long> tgChatIds
+    Map<Long, String> tgChatInfo
 ) {
 }

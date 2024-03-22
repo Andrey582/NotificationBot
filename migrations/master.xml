@@ -9,13 +9,8 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="08-03-2024-create-table-chat" author="Ganushkin Andrey">
-        <sqlFile path="sql/CreateTableChat.sql"/>
-    </changeSet>
-    <changeSet id="08-03-2024-create-table-link" author="Ganushkin Andrey">
-        <sqlFile path="sql/CreateTableLink.sql"/>
-    </changeSet>
-    <changeSet id="08-03-2024-create-table-chat-to-link" author="Ganushkin Andrey">
-        <sqlFile path="sql/CreateTableChatToLink.sql"/>
-    </changeSet>
+    <include file="sql/CreateTableChat.sql"/>
+    <include file="sql/CreateTableLink.sql"/>
+    <include file="sql/CreateTableChatToLink.sql"/>
+    <include file="sql/InsertTestData.sql" context="@test"/>
 </databaseChangeLog>

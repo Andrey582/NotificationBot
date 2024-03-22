@@ -1,28 +1,12 @@
 package edu.java.service;
 
-import edu.java.exception.exception.UserAlreadyRegisteredException;
-import edu.java.exception.exception.UserNotRegisteredException;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@Service
-public class ChatService {
+public interface ChatService {
 
-    List<Long> usersStub = new ArrayList<>();
+    @Transactional
+    void register(Long chatId);
 
-    public void create(Long id) {
-        if (usersStub.contains(id)) {
-            throw new UserAlreadyRegisteredException("User already registered.");
-        }
-        usersStub.add(id);
-    }
-
-    public void  delete(Long id) {
-        if (!usersStub.contains(id)) {
-            throw new UserNotRegisteredException("User not registered.");
-        }
-        usersStub.remove(id);
-    }
-
+    @Transactional
+    void unregister(Long chatId);
 }

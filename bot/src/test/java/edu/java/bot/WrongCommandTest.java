@@ -38,7 +38,7 @@ public class WrongCommandTest {
         Mockito.when(chat.id()).thenReturn(1L);
         Mockito.when(message.text()).thenReturn("/wrong");
 
-        String result = handler.handleCommand(update).getParameters().get("text").toString();
+        String result = handler.handleCommand(update).block().getParameters().get("text").toString();
         String expected = "Команда не найдена. Используте /help.";
 
         assertThat(result)

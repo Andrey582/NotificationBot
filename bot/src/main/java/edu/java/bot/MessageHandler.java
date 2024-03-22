@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 @Component
 public class MessageHandler {
@@ -15,16 +16,18 @@ public class MessageHandler {
     @Autowired
     private List<Command> commands;
 
-    public SendMessage handleCommand(Update update) {
+    public Mono<SendMessage> handleCommand(Update update) {
         Optional<Command> command = commands.stream()
             .filter(e -> e.supports(update))
             .findFirst();
 
         return command.isPresent()
             ? command.get().handle(update)
-            : new SendMessage(
-                update.message().chat().id(),
-                NOT_FOUND_COMMAND
+            : Mono.just(
+                new SendMessage(
+                    update.message().chat().id(),
+                    NOT_FOUND_COMMAND
+                )
         );
     }
 }

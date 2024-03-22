@@ -3,6 +3,7 @@ package edu.java.bot.commands;
 import com.pengrad.telegrambot.model.BotCommand;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
+import reactor.core.publisher.Mono;
 
 public interface Command {
 
@@ -10,7 +11,7 @@ public interface Command {
 
     String description();
 
-    SendMessage handle(Update update);
+    Mono<SendMessage> handle(Update update);
 
     @SuppressWarnings("MageicNumber")
     default boolean supports(Update update) {

@@ -2,6 +2,7 @@ package edu.java.exception.handler;
 
 import edu.java.exception.ErrorMessage;
 import edu.java.exception.exception.LinkAlreadyTrackedException;
+import edu.java.exception.exception.LinkNotFoundException;
 import edu.java.exception.exception.UserHasNoLinkException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -30,8 +31,20 @@ public class LinkExceptionHandler {
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage linkAlreadyTrackedExceptionHandler(LinkAlreadyTrackedException ex, WebRequest request) {
         return new ErrorMessage(
-            "Can`t add link.",
+            "Link already tracked.",
             String.valueOf(HttpStatus.UNPROCESSABLE_ENTITY.value()),
+            ex.getClass().getName(),
+            ex.getMessage(),
+            Arrays.stream(ex.getStackTrace()).map(StackTraceElement::toString).collect(Collectors.toList())
+        );
+    }
+
+    @ExceptionHandler(LinkNotFoundException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public ErrorMessage linkNotFoundExceptionHandler(LinkNotFoundException ex, WebRequest request) {
+        return new ErrorMessage(
+            "Link not found.",
+            String.valueOf(HttpStatus.NOT_FOUND.value()),
             ex.getClass().getName(),
             ex.getMessage(),
             Arrays.stream(ex.getStackTrace()).map(StackTraceElement::toString).collect(Collectors.toList())

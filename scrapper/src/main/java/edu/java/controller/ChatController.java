@@ -18,13 +18,13 @@ public class ChatController {
 
     @PostMapping
     public ResponseEntity<Void> createUser(@PathVariable Long id) {
-        chatService.create(id);
+        chatService.register(id);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        chatService.delete(id);
+        chatService.unregister(id);
         return ResponseEntity.ok().build();
     }
 }

@@ -38,7 +38,7 @@ public class HelpCommandTest {
         Mockito.when(chat.id()).thenReturn(1L);
         Mockito.when(message.text()).thenReturn("/help");
 
-        String result = command.handle(update).getParameters().get("text").toString();
+        String result = command.handle(update).block().getParameters().get("text").toString();
         String expected = "/list\n" +
             "Команда выводящая список всех отслеживаемых ссылок.\n\n" +
             "/start\n" +
