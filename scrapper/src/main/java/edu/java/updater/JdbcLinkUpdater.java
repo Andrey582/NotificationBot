@@ -12,24 +12,28 @@ import edu.java.service.BotService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
-@Slf4j
 public class JdbcLinkUpdater implements LinkUpdater {
 
-    @Autowired
     JdbcLinkRepository jdbcLinkRepository;
-    @Autowired
     JdbcChatToLinkRepository jdbcChatToLinkRepository;
-    @Autowired
     ApplicationConfig applicationConfig;
-    @Autowired
     LinkProcessor linkProcessor;
-    @Autowired
     BotService botService;
+
+    public JdbcLinkUpdater(
+        JdbcLinkRepository jdbcLinkRepository,
+        JdbcChatToLinkRepository jdbcChatToLinkRepository,
+        ApplicationConfig applicationConfig,
+        LinkProcessor linkProcessor,
+        BotService botService
+    ) {
+        this.jdbcLinkRepository = jdbcLinkRepository;
+        this.jdbcChatToLinkRepository = jdbcChatToLinkRepository;
+        this.applicationConfig = applicationConfig;
+        this.linkProcessor = linkProcessor;
+        this.botService = botService;
+    }
 
     @Override
     public void update() {

@@ -4,13 +4,15 @@ import edu.java.database.jdbc.JdbcChatRepository;
 import edu.java.exception.exception.UserAlreadyRegisteredException;
 import edu.java.exception.exception.UserNotRegisteredException;
 import edu.java.service.ChatService;
-import org.springframework.beans.factory.annotation.Autowired;
 
-//@Service
+
 public class JdbcChatService implements ChatService {
 
-    @Autowired
     JdbcChatRepository jdbcChatRepository;
+
+    public JdbcChatService(JdbcChatRepository jdbcChatRepository) {
+        this.jdbcChatRepository = jdbcChatRepository;
+    }
 
     @Override
     public void register(Long chatId) {
