@@ -40,14 +40,4 @@ public class ChatToLink {
 
     public ChatToLink() {
     }
-
-/*    public void setChat(Chat chat) {
-        this.chat = chat;
-        chat.getChatToLinks().add(this);
-    }
-
-    public void setLink(Link link) {
-        this.link = link;
-        link.getChatToLinks().add(this);
-    }*/
 }

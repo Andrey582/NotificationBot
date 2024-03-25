@@ -1,6 +1,8 @@
 package edu.java.database.jpa.model;
 
+import edu.java.database.jpa.UriConverter;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +26,7 @@ public class Link {
     private Long id;
 
     @Column(name = "link_url")
-    //@Convert(converter = UriConverter.class)
+    @Convert(converter = UriConverter.class)
     private URI linkUrl;
 
     @Column(name = "last_check_time")
