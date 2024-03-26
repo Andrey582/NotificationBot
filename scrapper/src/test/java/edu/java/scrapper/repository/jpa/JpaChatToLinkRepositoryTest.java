@@ -20,11 +20,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JpaChatToLinkRepositoryTest extends IntegrationTest implements JpaSetProperty {
 
     @Autowired
-    JpaChatToLinkRepository jpaChatToLinkRepository;
+    private JpaChatToLinkRepository jpaChatToLinkRepository;
     @Autowired
-    JpaChatRepository jpaChatRepository;
+    private JpaChatRepository jpaChatRepository;
     @Autowired
-    JpaLinkRepository jpaLinkRepository;
+    private JpaLinkRepository jpaLinkRepository;
 
     @Test
     @Transactional

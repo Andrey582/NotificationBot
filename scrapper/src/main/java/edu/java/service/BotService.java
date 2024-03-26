@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 public class BotService {
 
     @Autowired
-    WebClient botWebClient;
+    private WebClient botWebClient;
 
     public Mono<Void> sendLinkUpdate(BotLinkUpdateRequestDto linkUpdateRequestDto) {
         return botWebClient

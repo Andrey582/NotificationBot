@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
 public class BotService {
 
     @Autowired
-    TelegramBot telegramBot;
+    private TelegramBot telegramBot;
 
     public void update(LinkUpdateRequestDto linkUpdateRequestDto) {
         Map<Long, String> chatInfo = linkUpdateRequestDto.tgChatInfo();

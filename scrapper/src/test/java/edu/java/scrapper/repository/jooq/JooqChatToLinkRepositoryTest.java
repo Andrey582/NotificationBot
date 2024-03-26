@@ -19,11 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JooqChatToLinkRepositoryTest extends IntegrationTest implements JooqSetProperty {
 
     @Autowired
-    JooqChatToLinkRepository jooqChatToLinkRepository;
+    private JooqChatToLinkRepository jooqChatToLinkRepository;
     @Autowired
-    JooqChatRepository jooqChatRepository;
+    private JooqChatRepository jooqChatRepository;
     @Autowired
-    JooqLinkRepository jooqLinkRepository;
+    private JooqLinkRepository jooqLinkRepository;
 
     @Test
     @Transactional

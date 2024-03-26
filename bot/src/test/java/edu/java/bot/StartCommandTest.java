@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StartCommandTest {
 
     @Autowired
-    MessageHandler handler;
+    private MessageHandler handler;
 
     @Test
     public void startCommandTest() {

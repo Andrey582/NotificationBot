@@ -7,7 +7,7 @@ app:
   githubBaseUrl: https://api.github.com
   botBaseUrl: ${BOT_BASE_URL}
   githubAccessToken: ${GIT_HUB_ACCESS_TOKEN}
-  databaseAccessType: jooq
+  databaseAccessType: jpa
 
 springdoc:
   swagger-ui:

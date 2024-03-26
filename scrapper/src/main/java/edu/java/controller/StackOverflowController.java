@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 public class StackOverflowController {
 
     @Autowired
-    StackOverflowIntegrationService stackOverflowIntegrationService;
+    private StackOverflowIntegrationService stackOverflowIntegrationService;
 
     @GetMapping("/search/{question}")
     public Mono<StackOverflowResponseDto> getSearch(@PathVariable String question) {

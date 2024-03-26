@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public class JdbcLinkRepository {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     public Link add(URI linkUrl) {
         return jdbcTemplate.query(

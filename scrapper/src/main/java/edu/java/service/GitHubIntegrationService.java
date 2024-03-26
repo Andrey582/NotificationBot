@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 public class GitHubIntegrationService {
 
     @Autowired
-    WebClient gitHubWebClient;
+    private WebClient gitHubWebClient;
 
     public Mono<ResponseEntity<List<GitHubResponseDto>>> getEvents(String name, String repo) {
         return gitHubWebClient

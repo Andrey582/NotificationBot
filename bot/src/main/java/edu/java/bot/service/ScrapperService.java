@@ -20,7 +20,7 @@ public class ScrapperService {
     private static final String LINK_PATH = "/links";
 
     @Autowired
-    WebClient scrapperClient;
+    private WebClient scrapperClient;
 
     public Mono<ResponseEntity<Void>> registerUser(Long chatId) {
         return scrapperClient

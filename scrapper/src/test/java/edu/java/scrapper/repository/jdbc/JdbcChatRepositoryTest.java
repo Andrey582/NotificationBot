@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JdbcChatRepositoryTest extends IntegrationTest implements JdbcSetProperty {
 
     @Autowired
-    JdbcChatRepository jdbcChatRepository;
+    private JdbcChatRepository jdbcChatRepository;
 
     @Test
     @Transactional

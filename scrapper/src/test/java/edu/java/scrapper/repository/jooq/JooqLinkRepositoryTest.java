@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JooqLinkRepositoryTest extends IntegrationTest implements JooqSetProperty {
 
     @Autowired
-    JooqLinkRepository jooqLinkRepository;
+    private JooqLinkRepository jooqLinkRepository;
 
     @Test
     @Transactional

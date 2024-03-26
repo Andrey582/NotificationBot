@@ -19,7 +19,7 @@ public class LinkUpdateScheduler {
 
     public static final Logger LOGGER = LogManager.getLogger(LinkUpdateScheduler.class);
     @Autowired
-    LinkUpdater linkUpdater;
+    private LinkUpdater linkUpdater;
 
     @Scheduled(fixedDelayString = "#{ @scheduler.interval }")
     public void update() {

@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JpaChatRepositoryTest extends IntegrationTest implements JpaSetProperty {
 
     @Autowired
-    JpaChatRepository jpaChatRepository;
+    private JpaChatRepository jpaChatRepository;
 
     @Test
     @Transactional

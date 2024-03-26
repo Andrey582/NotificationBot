@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ListCommandTest {
 
     @Autowired
-    MessageHandler handler;
+    private MessageHandler handler;
 
     @Test
     public void listCommandTest() {

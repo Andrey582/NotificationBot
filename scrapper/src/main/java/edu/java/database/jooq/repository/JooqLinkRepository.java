@@ -14,7 +14,7 @@ import static edu.java.database.jooq.tables.Link.LINK;
 public class JooqLinkRepository {
 
     @Autowired
-    DSLContext dslContext;
+    private DSLContext dslContext;
 
     public Link add(URI linkUrl) {
         return dslContext

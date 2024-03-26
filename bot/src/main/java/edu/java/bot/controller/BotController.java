@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BotController {
 
     @Autowired
-    BotService botService;
+    private BotService botService;
 
     @PostMapping("/updates")
     public ResponseEntity<Void> updateLinks(@RequestBody LinkUpdateRequestDto linkUpdateRequestDto) {

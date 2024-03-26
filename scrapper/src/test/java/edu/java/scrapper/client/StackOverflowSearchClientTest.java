@@ -23,7 +23,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @WireMockTest(httpPort = 8080)
 class StackOverflowSearchClientTest {
     @Autowired
-    StackOverflowController stackOverflowController;
+    private StackOverflowController stackOverflowController;
 
     private void startServer() {
         stubFor(

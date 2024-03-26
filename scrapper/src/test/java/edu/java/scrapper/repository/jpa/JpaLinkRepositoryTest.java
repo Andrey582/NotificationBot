@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JpaLinkRepositoryTest extends IntegrationTest implements JpaSetProperty {
 
     @Autowired
-    JpaLinkRepository jpaLinkRepository;
+    private JpaLinkRepository jpaLinkRepository;
 
     @Test
     @Transactional

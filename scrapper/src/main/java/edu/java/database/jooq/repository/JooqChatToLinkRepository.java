@@ -18,7 +18,7 @@ import static edu.java.database.jooq.tables.Link.LINK;
 public class JooqChatToLinkRepository {
 
     @Autowired
-    DSLContext dslContext;
+    private DSLContext dslContext;
 
     public boolean add(Long chatId, Long linkId, @Nullable String name) {
         return dslContext

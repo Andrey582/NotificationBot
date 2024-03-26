@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JooqChatRepositoryTest extends IntegrationTest implements JooqSetProperty {
 
     @Autowired
-    JooqChatRepository jooqChatRepository;
+    private JooqChatRepository jooqChatRepository;
 
     @Test
     @Transactional

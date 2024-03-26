@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChatController {
 
     @Autowired
-    ChatService chatService;
+    private ChatService chatService;
 
     @PostMapping
     public ResponseEntity<Void> createUser(@PathVariable Long id) {

@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JdbcLinkRepositoryTest extends IntegrationTest implements JdbcSetProperty {
 
     @Autowired
-    JdbcLinkRepository jdbcLinkRepository;
+    private JdbcLinkRepository jdbcLinkRepository;
 
     @Test
     @Transactional
