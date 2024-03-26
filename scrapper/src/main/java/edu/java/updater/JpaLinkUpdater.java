@@ -15,11 +15,11 @@ import java.util.Map;
 
 public class JpaLinkUpdater implements LinkUpdater {
 
-    JpaLinkRepository jpaLinkRepository;
-    JpaChatToLinkRepository jpaChatToLinkRepository;
-    ApplicationConfig applicationConfig;
-    LinkProcessor linkProcessor;
-    BotService botService;
+    private JpaLinkRepository jpaLinkRepository;
+    private JpaChatToLinkRepository jpaChatToLinkRepository;
+    private ApplicationConfig applicationConfig;
+    private LinkProcessor linkProcessor;
+    private BotService botService;
 
     public JpaLinkUpdater(
         JpaLinkRepository jpaLinkRepository,

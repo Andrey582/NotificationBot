@@ -8,7 +8,7 @@ import edu.java.service.ChatService;
 
 public class JpaChatService implements ChatService {
 
-    JpaChatRepository jpaChatRepository;
+    private JpaChatRepository jpaChatRepository;
 
     public JpaChatService(JpaChatRepository jpaChatRepository) {
         this.jpaChatRepository = jpaChatRepository;

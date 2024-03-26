@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class JdbcLinkRepository {
@@ -47,6 +48,7 @@ public class JdbcLinkRepository {
             .orElse(null);
     }
 
+    @Transactional
     public Link updateLastCheck(URI linkUrl) {
         return jdbcTemplate.query(
             "update link set last_check_time = ? where link_url = ? returning *",

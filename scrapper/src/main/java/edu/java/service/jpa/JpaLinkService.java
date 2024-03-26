@@ -20,9 +20,9 @@ import lombok.SneakyThrows;
 
 public class JpaLinkService implements LinkService {
 
-    JpaLinkRepository jpaLinkRepository;
-    JpaChatRepository jpaChatRepository;
-    JpaChatToLinkRepository jpaChatToLinkRepository;
+    private JpaLinkRepository jpaLinkRepository;
+    private JpaChatRepository jpaChatRepository;
+    private JpaChatToLinkRepository jpaChatToLinkRepository;
 
     public JpaLinkService(
         JpaLinkRepository jpaLinkRepository,

@@ -18,11 +18,11 @@ import org.jooq.Record2;
 
 public class JooqLinkUpdater implements LinkUpdater {
 
-    JooqLinkRepository jooqLinkRepository;
-    JooqChatToLinkRepository jooqChatToLinkRepository;
-    ApplicationConfig applicationConfig;
-    LinkProcessor linkProcessor;
-    BotService botService;
+    private JooqLinkRepository jooqLinkRepository;
+    private JooqChatToLinkRepository jooqChatToLinkRepository;
+    private ApplicationConfig applicationConfig;
+    private LinkProcessor linkProcessor;
+    private BotService botService;
 
     public JooqLinkUpdater(
         JooqLinkRepository jooqLinkRepository,

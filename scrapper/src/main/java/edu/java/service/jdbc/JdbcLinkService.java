@@ -20,9 +20,9 @@ import java.util.List;
 
 public class JdbcLinkService implements LinkService {
 
-    JdbcLinkRepository jdbcLinkRepository;
-    JdbcChatRepository jdbcChatRepository;
-    JdbcChatToLinkRepository jdbcChatToLinkRepository;
+    private JdbcLinkRepository jdbcLinkRepository;
+    private JdbcChatRepository jdbcChatRepository;
+    private JdbcChatToLinkRepository jdbcChatToLinkRepository;
 
     public JdbcLinkService(
         JdbcLinkRepository jdbcLinkRepository,

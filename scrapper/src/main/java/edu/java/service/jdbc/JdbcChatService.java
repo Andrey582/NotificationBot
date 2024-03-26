@@ -8,7 +8,7 @@ import edu.java.service.ChatService;
 
 public class JdbcChatService implements ChatService {
 
-    JdbcChatRepository jdbcChatRepository;
+    private JdbcChatRepository jdbcChatRepository;
 
     public JdbcChatService(JdbcChatRepository jdbcChatRepository) {
         this.jdbcChatRepository = jdbcChatRepository;

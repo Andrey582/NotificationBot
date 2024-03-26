@@ -7,7 +7,7 @@ import edu.java.service.ChatService;
 
 public class JooqChatService implements ChatService {
 
-    JooqChatRepository jooqChatRepository;
+    private JooqChatRepository jooqChatRepository;
 
     public JooqChatService(JooqChatRepository jooqChatRepository) {
         this.jooqChatRepository = jooqChatRepository;

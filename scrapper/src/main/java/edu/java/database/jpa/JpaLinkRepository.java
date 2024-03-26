@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface JpaLinkRepository extends CrudRepository<Link, Long> {
@@ -21,6 +22,7 @@ public interface JpaLinkRepository extends CrudRepository<Link, Long> {
     @Query(value = "update link set last_check_time = now() where link_url = ?1", nativeQuery = true)
     int updateLastCheckByStringLink(String link);
 
+    @Transactional
     default int updateLastCheckByLinkUrl(URI link) {
         return updateLastCheckByStringLink(link.toString());
     }

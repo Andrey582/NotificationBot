@@ -23,9 +23,9 @@ import org.jooq.Record2;
 
 public class JooqLinkService implements LinkService {
 
-    JooqLinkRepository jooqLinkRepository;
-    JooqChatRepository jooqChatRepository;
-    JooqChatToLinkRepository jooqChatToLinkRepository;
+    private JooqLinkRepository jooqLinkRepository;
+    private JooqChatRepository jooqChatRepository;
+    private JooqChatToLinkRepository jooqChatToLinkRepository;
 
     public JooqLinkService(
         JooqLinkRepository jooqLinkRepository,

@@ -15,11 +15,11 @@ import java.util.Map;
 
 public class JdbcLinkUpdater implements LinkUpdater {
 
-    JdbcLinkRepository jdbcLinkRepository;
-    JdbcChatToLinkRepository jdbcChatToLinkRepository;
-    ApplicationConfig applicationConfig;
-    LinkProcessor linkProcessor;
-    BotService botService;
+    private JdbcLinkRepository jdbcLinkRepository;
+    private JdbcChatToLinkRepository jdbcChatToLinkRepository;
+    private ApplicationConfig applicationConfig;
+    private LinkProcessor linkProcessor;
+    private BotService botService;
 
     public JdbcLinkUpdater(
         JdbcLinkRepository jdbcLinkRepository,
