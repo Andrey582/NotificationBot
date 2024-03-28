@@ -11,7 +11,7 @@ import static edu.java.database.jooq.tables.Chat.CHAT;
 public class JooqChatRepository {
 
     @Autowired
-    DSLContext dslContext;
+    private DSLContext dslContext;
 
     public Chat add(Long chatId) {
         return dslContext

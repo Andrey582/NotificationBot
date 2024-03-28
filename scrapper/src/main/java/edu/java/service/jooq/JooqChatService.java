@@ -4,14 +4,14 @@ import edu.java.database.jooq.repository.JooqChatRepository;
 import edu.java.exception.exception.UserAlreadyRegisteredException;
 import edu.java.exception.exception.UserNotRegisteredException;
 import edu.java.service.ChatService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class JooqChatService implements ChatService {
 
-    @Autowired
-    JooqChatRepository jooqChatRepository;
+    private JooqChatRepository jooqChatRepository;
+
+    public JooqChatService(JooqChatRepository jooqChatRepository) {
+        this.jooqChatRepository = jooqChatRepository;
+    }
 
     @Override
     public void register(Long chatId) {

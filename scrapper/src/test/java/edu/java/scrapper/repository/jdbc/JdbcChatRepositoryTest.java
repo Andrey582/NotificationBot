@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class JdbcChatRepositoryTest extends IntegrationTest {
+public class JdbcChatRepositoryTest extends IntegrationTest implements JdbcSetProperty {
 
     @Autowired
-    JdbcChatRepository jdbcChatRepository;
+    private JdbcChatRepository jdbcChatRepository;
 
     @Test
     @Transactional

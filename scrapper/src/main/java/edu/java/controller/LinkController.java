@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LinkController {
 
     @Autowired
-    LinkService linkService;
+    private LinkService linkService;
 
     @GetMapping
     public ResponseEntity<ListLinkResponseDto> getAllLinks(@RequestHeader("id") Long id) {

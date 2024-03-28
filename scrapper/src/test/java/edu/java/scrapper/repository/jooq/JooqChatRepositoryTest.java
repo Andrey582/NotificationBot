@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class JooqChatRepositoryTest extends IntegrationTest {
+public class JooqChatRepositoryTest extends IntegrationTest implements JooqSetProperty {
 
     @Autowired
-    JooqChatRepository jooqChatRepository;
+    private JooqChatRepository jooqChatRepository;
 
     @Test
     @Transactional

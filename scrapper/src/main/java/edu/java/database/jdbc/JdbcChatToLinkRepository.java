@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public class JdbcChatToLinkRepository {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     public boolean add(Long chatId, Long linkId, String name) {
         return jdbcTemplate.update(

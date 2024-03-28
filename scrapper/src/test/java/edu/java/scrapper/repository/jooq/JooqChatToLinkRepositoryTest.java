@@ -16,14 +16,14 @@ import java.net.URISyntaxException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class JooqChatToLinkRepositoryTest extends IntegrationTest {
+public class JooqChatToLinkRepositoryTest extends IntegrationTest implements JooqSetProperty {
 
     @Autowired
-    JooqChatToLinkRepository jooqChatToLinkRepository;
+    private JooqChatToLinkRepository jooqChatToLinkRepository;
     @Autowired
-    JooqChatRepository jooqChatRepository;
+    private JooqChatRepository jooqChatRepository;
     @Autowired
-    JooqLinkRepository jooqLinkRepository;
+    private JooqLinkRepository jooqLinkRepository;
 
     @Test
     @Transactional

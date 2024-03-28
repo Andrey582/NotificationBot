@@ -13,10 +13,10 @@ import java.time.Duration;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class JooqLinkRepositoryTest extends IntegrationTest {
+public class JooqLinkRepositoryTest extends IntegrationTest implements JooqSetProperty {
 
     @Autowired
-    JooqLinkRepository jooqLinkRepository;
+    private JooqLinkRepository jooqLinkRepository;
 
     @Test
     @Transactional

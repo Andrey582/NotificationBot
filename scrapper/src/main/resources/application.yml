@@ -7,6 +7,7 @@ app:
   githubBaseUrl: https://api.github.com
   botBaseUrl: ${BOT_BASE_URL}
   githubAccessToken: ${GIT_HUB_ACCESS_TOKEN}
+  databaseAccessType: jpa
 
 springdoc:
   swagger-ui:
@@ -20,6 +21,10 @@ spring:
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
     driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
 
 server:
   port: 8080

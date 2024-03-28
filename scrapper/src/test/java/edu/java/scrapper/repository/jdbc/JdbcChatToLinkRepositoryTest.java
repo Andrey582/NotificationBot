@@ -16,14 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class JdbcChatToLinkRepositoryTest extends IntegrationTest {
+public class JdbcChatToLinkRepositoryTest extends IntegrationTest implements JdbcSetProperty {
 
     @Autowired
-    JdbcChatToLinkRepository jdbcChatToLinkRepository;
+    private JdbcChatToLinkRepository jdbcChatToLinkRepository;
     @Autowired
-    JdbcChatRepository jdbcChatRepository;
+    private JdbcChatRepository jdbcChatRepository;
     @Autowired
-    JdbcLinkRepository jdbcLinkRepository;
+    private JdbcLinkRepository jdbcLinkRepository;
 
     @Test
     @Transactional

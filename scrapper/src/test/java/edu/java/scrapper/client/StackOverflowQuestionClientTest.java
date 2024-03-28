@@ -24,7 +24,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 class StackOverflowQuestionClientTest {
 
     @Autowired
-    StackOverflowController stackOverflowController;
+    private StackOverflowController stackOverflowController;
 
     private void startServer() {
         stubFor(

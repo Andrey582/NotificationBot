@@ -15,10 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class JdbcLinkRepositoryTest extends IntegrationTest {
+public class JdbcLinkRepositoryTest extends IntegrationTest implements JdbcSetProperty {
 
     @Autowired
-    JdbcLinkRepository jdbcLinkRepository;
+    private JdbcLinkRepository jdbcLinkRepository;
 
     @Test
     @Transactional

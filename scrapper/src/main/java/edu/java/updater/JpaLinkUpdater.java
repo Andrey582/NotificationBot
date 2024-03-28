@@ -1,35 +1,35 @@
 package edu.java.updater;
 
 import edu.java.configuration.ApplicationConfig;
-import edu.java.database.jdbc.JdbcChatToLinkRepository;
-import edu.java.database.jdbc.JdbcLinkRepository;
-import edu.java.database.jdbc.model.Chat;
-import edu.java.database.jdbc.model.ChatToLink;
-import edu.java.database.jdbc.model.Link;
+import edu.java.database.jpa.JpaChatToLinkRepository;
+import edu.java.database.jpa.JpaLinkRepository;
+import edu.java.database.jpa.model.ChatToLink;
+import edu.java.database.jpa.model.Link;
 import edu.java.dto.request.BotLinkUpdateRequestDto;
 import edu.java.processor.LinkProcessor;
 import edu.java.service.BotService;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JdbcLinkUpdater implements LinkUpdater {
+public class JpaLinkUpdater implements LinkUpdater {
 
-    private JdbcLinkRepository jdbcLinkRepository;
-    private JdbcChatToLinkRepository jdbcChatToLinkRepository;
+    private JpaLinkRepository jpaLinkRepository;
+    private JpaChatToLinkRepository jpaChatToLinkRepository;
     private ApplicationConfig applicationConfig;
     private LinkProcessor linkProcessor;
     private BotService botService;
 
-    public JdbcLinkUpdater(
-        JdbcLinkRepository jdbcLinkRepository,
-        JdbcChatToLinkRepository jdbcChatToLinkRepository,
+    public JpaLinkUpdater(
+        JpaLinkRepository jpaLinkRepository,
+        JpaChatToLinkRepository jpaChatToLinkRepository,
         ApplicationConfig applicationConfig,
         LinkProcessor linkProcessor,
         BotService botService
     ) {
-        this.jdbcLinkRepository = jdbcLinkRepository;
-        this.jdbcChatToLinkRepository = jdbcChatToLinkRepository;
+        this.jpaLinkRepository = jpaLinkRepository;
+        this.jpaChatToLinkRepository = jpaChatToLinkRepository;
         this.applicationConfig = applicationConfig;
         this.linkProcessor = linkProcessor;
         this.botService = botService;
@@ -37,19 +37,18 @@ public class JdbcLinkUpdater implements LinkUpdater {
 
     @Override
     public void update() {
-        List<Link> links = jdbcLinkRepository
-            .findByTime(applicationConfig.scheduler().forceCheckDelay());
+        List<Link> links = jpaLinkRepository
+            .findByLastCheckTimeIsAfterDuration(applicationConfig.scheduler().forceCheckDelay());
 
         for (Link link : links) {
 
             Map<Long, String> info = new HashMap<>();
-
-            linkProcessor.processLink(link.getLinkUrl(), link.getLastCheckTime())
-                .doOnSuccess(e -> jdbcLinkRepository.updateLastCheck(link.getLinkUrl()))
+            URI uri = link.getLinkUrl();
+            linkProcessor.processLink(uri, link.getLastCheckTime())
+                .doOnSuccess(e -> jpaLinkRepository.updateLastCheckByLinkUrl(uri))
                 .subscribe(e -> {
-                        for (ChatToLink chatToLink : jdbcChatToLinkRepository.findAllChatByLink(link.getId())) {
-                            Chat chat = chatToLink.getChat();
-                            info.put(chat.getId(), chatToLink.getName());
+                        for (ChatToLink chatToLink : jpaChatToLinkRepository.findAllByLinkId(link.getId())) {
+                            info.put(chatToLink.getChat().getId(), chatToLink.getName());
                         }
                         botService.sendLinkUpdate(new BotLinkUpdateRequestDto(
                                 link.getId(),

@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 public class StackOverflowIntegrationService {
 
     @Autowired
-    WebClient stackOverflowWebClient;
+    private WebClient stackOverflowWebClient;
 
     public Mono<StackOverflowResponseDto> getSearch(String question) {
         return stackOverflowWebClient

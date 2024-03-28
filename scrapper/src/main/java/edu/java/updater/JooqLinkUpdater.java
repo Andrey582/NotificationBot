@@ -15,22 +15,28 @@ import java.util.List;
 import java.util.Map;
 import lombok.SneakyThrows;
 import org.jooq.Record2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
 public class JooqLinkUpdater implements LinkUpdater {
 
-    @Autowired
-    JooqLinkRepository jooqLinkRepository;
-    @Autowired
-    JooqChatToLinkRepository jooqChatToLinkRepository;
-    @Autowired
-    ApplicationConfig applicationConfig;
-    @Autowired
-    LinkProcessor linkProcessor;
-    @Autowired
-    BotService botService;
+    private JooqLinkRepository jooqLinkRepository;
+    private JooqChatToLinkRepository jooqChatToLinkRepository;
+    private ApplicationConfig applicationConfig;
+    private LinkProcessor linkProcessor;
+    private BotService botService;
+
+    public JooqLinkUpdater(
+        JooqLinkRepository jooqLinkRepository,
+        JooqChatToLinkRepository jooqChatToLinkRepository,
+        ApplicationConfig applicationConfig,
+        LinkProcessor linkProcessor,
+        BotService botService
+    ) {
+        this.jooqLinkRepository = jooqLinkRepository;
+        this.jooqChatToLinkRepository = jooqChatToLinkRepository;
+        this.applicationConfig = applicationConfig;
+        this.linkProcessor = linkProcessor;
+        this.botService = botService;
+    }
 
     @SneakyThrows
     @Override

@@ -23,7 +23,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @WireMockTest(httpPort = 8080)
 class GitHubClientTest {
     @Autowired
-    GitHubController gitHubController;
+    private GitHubController gitHubController;
 
     private void startServer() {
         stubFor(

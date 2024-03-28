@@ -1,6 +1,6 @@
 package edu.java;
 
-import edu.java.updater.JdbcLinkUpdater;
+import edu.java.updater.LinkUpdater;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,11 @@ public class LinkUpdateScheduler {
 
     public static final Logger LOGGER = LogManager.getLogger(LinkUpdateScheduler.class);
     @Autowired
-    JdbcLinkUpdater updater;
+    private LinkUpdater linkUpdater;
 
     @Scheduled(fixedDelayString = "#{ @scheduler.interval }")
     public void update() {
         LOGGER.info("update");
-        updater.update();
+        linkUpdater.update();
     }
 }

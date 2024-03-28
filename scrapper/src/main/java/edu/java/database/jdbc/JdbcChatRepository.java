@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public class JdbcChatRepository {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     public Chat add(Long chatId) {
         return jdbcTemplate.query(

@@ -8,13 +8,14 @@ import java.util.List;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import static edu.java.database.jooq.tables.Link.LINK;
 
 @Repository
 public class JooqLinkRepository {
 
     @Autowired
-    DSLContext dslContext;
+    private DSLContext dslContext;
 
     public Link add(URI linkUrl) {
         return dslContext
@@ -33,6 +34,7 @@ public class JooqLinkRepository {
             .fetchOneInto(Link.class);
     }
 
+    @Transactional
     public Link updateLastCheck(URI linkUrl) {
         return dslContext
             .update(LINK)

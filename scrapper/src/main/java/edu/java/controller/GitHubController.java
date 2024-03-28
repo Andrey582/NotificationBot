@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 public class GitHubController {
 
     @Autowired
-    GitHubIntegrationService gitHubIntegrationService;
+    private GitHubIntegrationService gitHubIntegrationService;
 
     @GetMapping("/{name}/{repo}")
     public Mono<ResponseEntity<List<GitHubResponseDto>>> getEvents(

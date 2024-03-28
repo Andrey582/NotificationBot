@@ -20,18 +20,22 @@ import java.net.URISyntaxException;
 import java.util.List;
 import lombok.SneakyThrows;
 import org.jooq.Record2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class JooqLinkService implements LinkService {
 
-    @Autowired
-    JooqLinkRepository jooqLinkRepository;
-    @Autowired
-    JooqChatRepository jooqChatRepository;
-    @Autowired
-    JooqChatToLinkRepository jooqChatToLinkRepository;
+    private JooqLinkRepository jooqLinkRepository;
+    private JooqChatRepository jooqChatRepository;
+    private JooqChatToLinkRepository jooqChatToLinkRepository;
+
+    public JooqLinkService(
+        JooqLinkRepository jooqLinkRepository,
+        JooqChatRepository jooqChatRepository,
+        JooqChatToLinkRepository jooqChatToLinkRepository
+    ) {
+        this.jooqLinkRepository = jooqLinkRepository;
+        this.jooqChatRepository = jooqChatRepository;
+        this.jooqChatToLinkRepository = jooqChatToLinkRepository;
+    }
 
     @SneakyThrows
     @SuppressWarnings("MultipleStringLiterals")
@@ -56,7 +60,7 @@ public class JooqLinkService implements LinkService {
     public LinkResponseDto delete(Long chatId, LinkRequestDto body) {
         Chat chat = jooqChatRepository.findChatById(chatId);
 
-        if (jooqChatRepository.findChatById(chatId) == null) {
+        if (chat == null) {
             throw new UserNotRegisteredException("Can`t find user.");
         }
 
