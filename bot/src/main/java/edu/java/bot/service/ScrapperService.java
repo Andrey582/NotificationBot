@@ -3,7 +3,10 @@ package edu.java.bot.service;
 import edu.java.bot.dto.request.LinkRequestDto;
 import edu.java.bot.dto.response.LinkResponseDto;
 import edu.java.bot.dto.response.ListLinkResponseDto;
+import edu.java.bot.retry.RetryProvider;
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+@SuppressWarnings("MagicNumber")
 @Service
 @Slf4j
 public class ScrapperService {
@@ -29,6 +33,7 @@ public class ScrapperService {
             .retrieve()
             .toBodilessEntity()
             .doOnError(throwable -> log.error(throwable.getMessage()))
+            .retryWhen(RetryProvider.constantRetry(3L, Duration.ofSeconds(10), List.of(400, 500)))
             .onErrorResume(throwable -> Mono.just(ResponseEntity.badRequest().build()));
     }
 
@@ -37,7 +42,9 @@ public class ScrapperService {
             .delete()
             .uri(USER_PATH + chatId)
             .retrieve()
-            .toBodilessEntity();
+            .toBodilessEntity()
+            .retryWhen(RetryProvider
+                .linearRetry(3L, Duration.ofSeconds(10), Duration.ofSeconds(10), List.of(400, 500)));
     }
 
     public Mono<ListLinkResponseDto> getAllLinks(Long chatId) {
@@ -49,6 +56,7 @@ public class ScrapperService {
             .bodyToMono(ListLinkResponseDto.class)
             .doOnSuccess(e -> log.info("Get link success"))
             .doOnError(throwable -> log.error(throwable.getMessage()))
+            .retryWhen(RetryProvider.exponentialRetry(3L, Duration.ofSeconds(10), List.of(400, 500)))
             .onErrorReturn(new ListLinkResponseDto(new ArrayList<>(), 0));
     }
 
@@ -62,6 +70,7 @@ public class ScrapperService {
             .bodyToMono(LinkResponseDto.class)
             .doOnSuccess(e -> log.info("Add link success"))
             .doOnError(throwable -> log.error(throwable.getMessage()))
+            .retryWhen(RetryProvider.exponentialRetry(3L, Duration.ofSeconds(10), List.of(400, 500)))
             .onErrorReturn(new LinkResponseDto(null, null, null));
     }
 
@@ -75,6 +84,7 @@ public class ScrapperService {
             .bodyToMono(LinkResponseDto.class)
             .doOnSuccess(e -> log.info("Delete link success"))
             .doOnError(throwable -> log.error(throwable.getMessage()))
+            .retryWhen(RetryProvider.exponentialRetry(3L, Duration.ofSeconds(10), List.of(400, 500)))
             .onErrorReturn(new LinkResponseDto(null, null, null));
     }
 }
