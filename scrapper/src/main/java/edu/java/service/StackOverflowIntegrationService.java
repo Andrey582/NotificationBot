@@ -1,12 +1,15 @@
 package edu.java.service;
 
 import edu.java.dto.response.StackOverflowResponseDto;
+import edu.java.retry.RetryProvider;
+import java.time.Duration;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-@SuppressWarnings("MultipleStringLiterals")
+@SuppressWarnings({"MultipleStringLiterals", "MagicNumber"})
 @Service
 public class StackOverflowIntegrationService {
 
@@ -25,7 +28,8 @@ public class StackOverflowIntegrationService {
                     .queryParam("q", question)
                     .build()
             ).retrieve()
-            .bodyToMono(StackOverflowResponseDto.class);
+            .bodyToMono(StackOverflowResponseDto.class)
+            .retryWhen(RetryProvider.exponentialRetry(3L, Duration.ofSeconds(10), List.of(400, 500)));
     }
 
     public Mono<StackOverflowResponseDto> getQuestionById(Long questionId) {
@@ -39,6 +43,7 @@ public class StackOverflowIntegrationService {
                     .queryParam("site", "stackoverflow")
                     .build()
             ).retrieve()
-            .bodyToMono(StackOverflowResponseDto.class);
+            .bodyToMono(StackOverflowResponseDto.class)
+            .retryWhen(RetryProvider.exponentialRetry(3L, Duration.ofSeconds(10), List.of(400, 500)));
     }
 }

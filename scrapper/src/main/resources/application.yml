@@ -9,6 +9,7 @@ app:
   githubAccessToken: ${GIT_HUB_ACCESS_TOKEN}
   databaseAccessType: jpa
 
+
 springdoc:
   swagger-ui:
     path: /swagger-ui
