@@ -17,7 +17,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 )
 public class LinkUpdateScheduler {
 
-    public static final Logger LOGGER = LogManager.getLogger(LinkUpdateScheduler.class);
     @Autowired
     private LinkUpdater linkUpdater;
 
@@ -26,4 +25,6 @@ public class LinkUpdateScheduler {
         LOGGER.info("update");
         linkUpdater.update();
     }
+
+    public static final Logger LOGGER = LogManager.getLogger(LinkUpdateScheduler.class);
 }

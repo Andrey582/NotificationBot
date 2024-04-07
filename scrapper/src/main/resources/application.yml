@@ -8,6 +8,25 @@ app:
   botBaseUrl: ${BOT_BASE_URL}
   githubAccessToken: ${GIT_HUB_ACCESS_TOKEN}
   databaseAccessType: jpa
+  use-queue: true
+  kafka-prop:
+    acks: all
+    batch-size: 512
+    max-request-size: 512
+    linger-ms: 5000
+    bootstrap-server: 127.0.0.1:9092
+    topic-prop:
+      name: main
+      partitions: 1
+      replicas: 1
+  retry-prop:
+    attempt: 3
+    delay: 10s
+    linear-step: 10s
+    retry-type: exponential
+    status-code:
+      - 400
+      - 500
 
 
 springdoc:
