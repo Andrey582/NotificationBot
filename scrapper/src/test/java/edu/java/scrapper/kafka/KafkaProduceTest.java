@@ -30,6 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @EmbeddedKafka(
     partitions = 1,
     brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"},
+    bootstrapServersProperty = "PLAINTEXT://localhost:9092",
     topics = "test_scrapper")
 public class KafkaProduceTest {
 
