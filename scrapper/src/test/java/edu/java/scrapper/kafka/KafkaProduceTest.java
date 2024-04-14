@@ -1,11 +1,14 @@
 package edu.java.scrapper.kafka;
 
+import edu.java.configuration.ApplicationConfig;
 import edu.java.dto.request.BotLinkUpdateRequestDto;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.internals.Topic;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.jooq.meta.derby.sys.Sys;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -16,8 +19,11 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
+import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,15 +35,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DirtiesContext
 @EmbeddedKafka(
     partitions = 1,
-    brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"},
-    bootstrapServersProperty = "PLAINTEXT://localhost:9092",
-    topics = "test_scrapper")
+    brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"}
+)
 public class KafkaProduceTest {
 
     @Autowired
     private KafkaTemplate<String, BotLinkUpdateRequestDto> kafkaTemplate;
 
-    CountDownLatch countDownLatch = new CountDownLatch(1);
+    private CountDownLatch countDownLatch = new CountDownLatch(1);
+
 
     @Test
     public void sendTest() throws InterruptedException {
@@ -61,12 +67,16 @@ public class KafkaProduceTest {
 
     @TestConfiguration
     static class ConsumerConfig{
+
+        @Autowired
+        private ApplicationConfig applicationConfig;
+
         @Bean
         public DefaultKafkaConsumerFactory<String, BotLinkUpdateRequestDto> kafkaConsumerFactory() {
 
             Map<String, Object> prop = new HashMap<>();
 
-            prop.put(org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "PLAINTEXT://localhost:9092");
+            prop.put(org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, applicationConfig.kafkaProp().bootstrapServer());
 
             prop.put(org.apache.kafka.clients.consumer.ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
             prop.put(org.apache.kafka.clients.consumer.ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
