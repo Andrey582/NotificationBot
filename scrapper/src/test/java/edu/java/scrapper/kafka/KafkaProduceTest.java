@@ -57,4 +57,50 @@ public class KafkaProduceTest {
     public void consume(BotLinkUpdateRequestDto requestDto) {
         countDownLatch.countDown();
     }
+
+    @TestConfiguration
+    static class ConsumerConfig{
+
+        @Autowired
+        private ApplicationConfig applicationConfig;
+
+        @Bean
+        public DefaultKafkaConsumerFactory<String, BotLinkUpdateRequestDto> kafkaConsumerFactory() {
+
+            Map<String, Object> prop = new HashMap<>();
+
+            prop.put(org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, applicationConfig.kafkaProp().bootstrapServer());
+
+            prop.put(org.apache.kafka.clients.consumer.ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+            prop.put(org.apache.kafka.clients.consumer.ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+
+
+            return new DefaultKafkaConsumerFactory<>(
+                prop,
+                new StringDeserializer(),
+                new JsonDeserializer<>(BotLinkUpdateRequestDto.class)
+            );
+        }
+
+        @Bean
+        public ConcurrentKafkaListenerContainerFactory<String, BotLinkUpdateRequestDto>
+        kafkaListener(DefaultKafkaConsumerFactory<String, BotLinkUpdateRequestDto> kafkaConsumerFactory) {
+
+            ConcurrentKafkaListenerContainerFactory<String, BotLinkUpdateRequestDto> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+
+            factory.setConsumerFactory(kafkaConsumerFactory);
+
+            return factory;
+        }
+
+        @Bean
+        public NewTopic newTestTopic() {
+            return TopicBuilder
+                .name("test_scrapper")
+                .partitions(1)
+                .replicas(1)
+                .build();
+        }
+    }
 }
