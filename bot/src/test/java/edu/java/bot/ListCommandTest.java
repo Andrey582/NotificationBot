@@ -23,7 +23,6 @@ import reactor.core.publisher.Mono;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = BotApplication.class)
-@DirtiesContext
 @EmbeddedKafka
 public class ListCommandTest {
 

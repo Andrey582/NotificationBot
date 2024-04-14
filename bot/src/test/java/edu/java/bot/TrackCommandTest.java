@@ -26,7 +26,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = BotApplication.class)
-@DirtiesContext
 @EmbeddedKafka
 public class TrackCommandTest {
 

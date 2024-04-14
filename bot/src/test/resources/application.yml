@@ -23,7 +23,7 @@ app:
     retry-type: linear
     delay: 10s
     linear-step: 10s
-    attempt: 3
+    attempt: 0
     status-code:
       - 400
       - 500
