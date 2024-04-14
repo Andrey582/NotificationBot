@@ -91,7 +91,7 @@ public class KafkaProduceTest {
         }
 
         @Bean
-        public NewTopic newTopic() {
+        public NewTopic newTestTopic() {
             return TopicBuilder
                 .name("test_scrapper")
                 .partitions(1)

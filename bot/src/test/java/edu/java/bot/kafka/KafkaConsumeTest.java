@@ -84,7 +84,7 @@ public class KafkaConsumeTest {
         }
 
         @Bean
-        public NewTopic newTopic() {
+        public NewTopic newTestTopic() {
             return TopicBuilder
                 .name("test_bot")
                 .partitions(1)

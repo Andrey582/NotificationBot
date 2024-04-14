@@ -95,7 +95,7 @@ public class KafkaDlqTest {
         }
 
         @Bean
-        public NewTopic newTopic() {
+        public NewTopic newTestTopic() {
             return TopicBuilder
                 .name("test_bot_dlq")
                 .partitions(1)
