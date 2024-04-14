@@ -1,5 +1,6 @@
 package edu.java.bot.kafka;
 
+import edu.java.bot.configuration.ApplicationConfig;
 import edu.java.bot.dto.request.LinkUpdateRequestDto;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -76,11 +77,14 @@ public class KafkaDlqTest {
     @TestConfiguration
     static class ConsumerConfig{
 
+        @Autowired
+        private ApplicationConfig applicationConfig;
+
         @Bean
         public DefaultKafkaProducerFactory<String, LinkUpdateRequestDto> kafkaTestProducerFactory() {
             Map<String, Object> prop = new HashMap<>();
 
-            prop.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "PLAINTEXT://localhost:9092");
+            prop.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, applicationConfig.kafkaProducer().bootstrapServer());
 
             prop.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
             prop.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);

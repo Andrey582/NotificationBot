@@ -1,0 +1,62 @@
+app:
+  telegram-token: ${TELEGRAM_BOT_TOKEN}
+  scrapperUrl: ${SCRAPPER_BASE_URL:http://localhost:8080}
+  kafka-consumer:
+    bootstrap-server: ${spring.kafka.bootstrap-servers}
+    enable-auto-commit: false
+    fetch-max-byte: 512
+    max-poll-records: 5
+    max-poll-interval: 5
+    group-id: listen
+    isolation-level: read_committed
+  kafka-producer:
+    acks: all
+    batch-size: 1024
+    max-request-size: 1024
+    linger-ms: 5000
+    bootstrap-server: ${spring.kafka.bootstrap-servers}
+    topic-prop:
+      name: main_dlq
+      partitions: 1
+      replicas: 1
+  retry-prop:
+    retry-type: linear
+    delay: 10s
+    linear-step: 10s
+    attempt: 3
+    status-code:
+      - 400
+      - 500
+
+spring:
+  application:
+    name: bot
+  jackson:
+    time-zone: UTC
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+
+server:
+  port: 8090
+
+logging:
+  config: classpath:log4j2-plain.xml
+
+management:
+  server:
+    port: 8091
+  endpoints:
+    web:
+      base-path: "/"
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus
+      path-mapping:
+        prometheus: metrics
+  metrics:
+    tags:
+      application: ${spring.application.name}
