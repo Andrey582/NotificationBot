@@ -1,6 +1,8 @@
 package edu.java.scrapper.kafka;
 
 import edu.java.dto.request.BotLinkUpdateRequestDto;
+import org.apache.kafka.clients.admin.NewTopic;
+import org.apache.kafka.common.internals.Topic;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.ContainerProperties;
@@ -85,6 +88,15 @@ public class KafkaProduceTest {
             factory.setConsumerFactory(kafkaConsumerFactory);
 
             return factory;
+        }
+
+        @Bean
+        public NewTopic newTopic() {
+            return TopicBuilder
+                .name("test_scrapper")
+                .partitions(1)
+                .replicas(1)
+                .build();
         }
     }
 }

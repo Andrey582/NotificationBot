@@ -1,6 +1,7 @@
 package edu.java.bot.kafka;
 
 import edu.java.bot.dto.request.LinkUpdateRequestDto;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.RetryableTopic;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.Acknowledgment;
@@ -90,6 +92,15 @@ public class KafkaDlqTest {
         public KafkaTemplate<String, LinkUpdateRequestDto>
         kafkaTemplate(DefaultKafkaProducerFactory<String, LinkUpdateRequestDto> kafkaTestProducerFactory) {
             return new KafkaTemplate<>(kafkaTestProducerFactory);
+        }
+
+        @Bean
+        public NewTopic newTopic() {
+            return TopicBuilder
+                .name("test_bot_dlq")
+                .partitions(1)
+                .replicas(1)
+                .build();
         }
     }
 }
