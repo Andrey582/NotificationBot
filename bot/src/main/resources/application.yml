@@ -6,6 +6,7 @@ app:
     enable-auto-commit: false
     fetch-max-byte: 512
     max-poll-records: 5
+    max-poll-interval: 5
     group-id: listen
     isolation-level: read_committed
   kafka-producer:
@@ -42,3 +43,20 @@ server:
 
 logging:
   config: classpath:log4j2-plain.xml
+
+management:
+  server:
+    port: 8091
+  endpoints:
+    web:
+      base-path: "/"
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus
+      path-mapping:
+        prometheus: metrics
+  metrics:
+    tags:
+      application: ${spring.application.name}

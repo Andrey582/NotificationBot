@@ -29,6 +29,8 @@ public record ApplicationConfig(
         @NotNull
         Integer maxPollRecords,
         @NotNull
+        Integer maxPollInterval,
+        @NotNull
         Boolean enableAutoCommit,
         @NotEmpty
         String isolationLevel,

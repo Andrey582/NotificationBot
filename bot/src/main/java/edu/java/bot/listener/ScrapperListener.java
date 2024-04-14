@@ -2,6 +2,7 @@ package edu.java.bot.listener;
 
 import edu.java.bot.dto.request.LinkUpdateRequestDto;
 import edu.java.bot.service.BotService;
+import io.micrometer.core.instrument.Counter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.RetryableTopic;
@@ -14,6 +15,8 @@ public class ScrapperListener {
 
     @Autowired
     private BotService botService;
+    @Autowired
+    private Counter counter;
 
     @RetryableTopic(
         attempts = "1",
@@ -21,9 +24,11 @@ public class ScrapperListener {
         dltTopicSuffix = "_dlq",
         include = RuntimeException.class
     )
+
     @KafkaListener(topics = "main", groupId = "listen", containerFactory = "kafkaListener")
     public void listen(@Payload LinkUpdateRequestDto linkUpdateRequestDto, Acknowledgment acknowledgment) {
         botService.update(linkUpdateRequestDto);
         acknowledgment.acknowledge();
+        counter.increment(1.0);
     }
 }
