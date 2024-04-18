@@ -35,6 +35,7 @@ public class KafkaConsumerConfig {
 
         prop.put(ConsumerConfig.FETCH_MAX_BYTES_CONFIG, applicationConfig.kafkaConsumer().fetchMaxByte());
         prop.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, applicationConfig.kafkaConsumer().maxPollRecords());
+        prop.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, applicationConfig.kafkaConsumer().maxPollInterval());
 
         prop.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, applicationConfig.kafkaConsumer().enableAutoCommit());
 

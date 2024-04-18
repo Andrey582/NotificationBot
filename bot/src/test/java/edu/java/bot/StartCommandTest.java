@@ -15,11 +15,14 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.test.context.EmbeddedKafka;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.util.ReflectionTestUtils;
 import reactor.core.publisher.Mono;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = BotApplication.class)
+@EmbeddedKafka
 public class StartCommandTest {
 
     @Autowired

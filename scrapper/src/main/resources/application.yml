@@ -8,7 +8,7 @@ app:
   botBaseUrl: ${BOT_BASE_URL}
   githubAccessToken: ${GIT_HUB_ACCESS_TOKEN}
   databaseAccessType: jpa
-  use-queue: true
+  use-queue: false
   kafka-prop:
     acks: all
     batch-size: 512
@@ -51,3 +51,20 @@ server:
 
 logging:
   config: classpath:log4j2-plain.xml
+
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      base-path: "/"
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus
+      path-mapping:
+        prometheus: metrics
+  metrics:
+    tags:
+      application: ${spring.application.name}
