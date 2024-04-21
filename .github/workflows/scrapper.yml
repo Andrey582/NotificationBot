@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/scrapper-image
+  IMAGE_NAME: andrey582/notificationbot/scrapper-image
 
 jobs:
   build:
