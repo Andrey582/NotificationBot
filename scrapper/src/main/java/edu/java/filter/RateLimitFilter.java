@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 @SuppressWarnings("MagicNumber")
 @Component
-@Order(1)
 public class RateLimitFilter implements Filter {
 
     @Autowired
