@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/bot-image
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
@@ -42,7 +42,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: push image
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/bot-image
 
       - id: jacoco
         uses: madrapps/jacoco-report@v1.6.1
