@@ -42,7 +42,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: push image
-        run: docker push ${{ env.REGISTRY }}/${{ IMAGE_NAME }}/bot-image
+        run: docker push ${{ env.REGISTRY }}/${{ IMAGE_NAME }}/scrapper-image
 
       - id: jacoco
         uses: madrapps/jacoco-report@v1.6.1
