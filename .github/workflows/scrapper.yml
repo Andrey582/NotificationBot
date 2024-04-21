@@ -27,7 +27,7 @@ jobs:
         run: mvn -pl scrapper -am package
 
       - name: build scrapper image
-        run: docker build -f scrapper-image .
+        run: docker build -t ghcr.io/bot-image -f scrapper.Dockerfile .
         working-directory: ${{ github.workspace }}/scrapper
 
       - name: log in to the Container regestry
