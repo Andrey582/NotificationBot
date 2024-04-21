@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: andrey582/notificationbot/bot-image
+  IMAGE_NAME: ${{ github.repository }}/bot-image
 
 jobs:
   build:
