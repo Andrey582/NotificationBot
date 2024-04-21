@@ -3,8 +3,8 @@ package edu.java.bot;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
-import java.util.List;
 import io.micrometer.core.instrument.Counter;
+import java.util.List;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
